@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Candidate} from '../types/candidate';
 import {Observable} from 'rxjs';
 import {GiveTheCueTask} from '../types/give-the-cue-task';
@@ -16,6 +16,10 @@ function getMock(task: GiveTheCueTask): {score: number, prediction: string[]} {
 }
 
 const awsURL = 'https://gvlab-bucket.s3.amazonaws.com/';
+const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+});
 
 function getImagePath(imgName: string) {
     return awsURL+imgName+'.jpg';
@@ -80,7 +84,7 @@ export class ServerRequestService {
     }
 
     sendReportForm(data: object) {
-        this.httpService.post('https://gvlab-backend.herokuapp.com/report', JSON.stringify(data)).subscribe((response: any) => {
+        this.httpService.post('https://gvlab-backend.herokuapp.com/report', JSON.stringify(data), {headers}).subscribe((response: any) => {
             console.log('Report form was sent')
         })
     }
