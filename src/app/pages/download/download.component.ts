@@ -16,7 +16,7 @@ export class DownloadComponent implements OnInit, OnDestroy {
   pagination1 = 1;
 
   constructor(private router: Router, private changeDetectorRef: ChangeDetectorRef) {
-    window.name = 'GVLAB'
+    window.name = 'WinoGAViL'
   }
 
   ngOnInit() {

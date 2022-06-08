@@ -34,7 +34,7 @@ export class MturkCreateComponent extends MturkTask implements OnInit, OnDestroy
                 private dialog: MatDialog,
                 private serverRequestService: ServerRequestService) {
         super();
-        window.name = 'GVLAB'
+        window.name = 'WinoGAViL'
         this.id = this.activeRouter.snapshot.params.id
         if (this.id && typeof this.id === 'string') {
             this.serverRequestService.getGiveTheCue(this.id).subscribe((task: GiveTheCueTask) => {

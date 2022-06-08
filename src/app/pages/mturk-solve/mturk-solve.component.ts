@@ -33,7 +33,7 @@ export class MturkSolveComponent extends MturkTask implements OnInit, OnDestroy 
                 private serverRequestService: ServerRequestService
     ) {
         super();
-        window.name = 'GVLAB'
+        window.name = 'WinoGAViL'
         this.id = this.activeRouter.snapshot.params.id
         this.solveCreate = this.activeRouter.snapshot.routeConfig.path === solveCratePath;
         if (this.solveCreate){

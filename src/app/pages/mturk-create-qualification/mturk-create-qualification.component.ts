@@ -34,7 +34,7 @@ export class MturkCreateQualificationComponent extends QualificationTask<GiveThe
                 protected serverRequestService: ServerRequestService
     ) {
         super(serverRequestService, TaskTypeEnum.GIVE_THE_CUE);
-        window.name = 'GVLAB'
+        window.name = 'WinoGAViL'
         this.turkSubmitTo = this.activeRouter.snapshot?.queryParams?.turkSubmitTo
         this.assignmentId = this.activeRouter.snapshot?.queryParams?.assignmentId
         this.experimentMode = get_experiment_mode(this.activeRouter.snapshot.url[2].path)

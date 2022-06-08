@@ -21,7 +21,7 @@ export class MainComponent implements OnInit, OnDestroy {
     task: GuessTheAssociationsTask = getGuessTheAssociationsTask('monkey-human-swing');
 
     constructor(private router: Router, private changeDetectorRef: ChangeDetectorRef) {
-        window.name = 'GVLAB'
+        window.name = 'WinoGAViL'
     }
 
     ngOnInit() {

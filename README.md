@@ -1,1 +1,1 @@
-# GVLAB-dataset
+# WinoGAViL

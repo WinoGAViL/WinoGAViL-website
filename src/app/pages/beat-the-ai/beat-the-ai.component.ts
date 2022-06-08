@@ -68,7 +68,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
             behavior: 'smooth'
         });
 
-        window.name = 'GVLAB'
+        window.name = 'WinoGAViL'
         if (this.activeRouter.snapshot.routeConfig.path === beatTheAICreate) {
             this.practice(false)
         } else if (this.activeRouter.snapshot.routeConfig.path === beatTheAISolve) {
