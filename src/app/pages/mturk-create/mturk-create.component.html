@@ -1,0 +1,37 @@
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <div class="container center-container" *ngIf="giveTheCueTask">
+            <div class="content-center brand" [ngClass]="{'content-center-six': isSixCandidates}">
+                <div class="label hint guess-clue-hint"
+                     [style]="{'background-color': responseBackgroundColor, visibility: responseBackgroundColor ? 'visible' : 'hidden', color: responseTextColor}">
+                    {{hint}}
+                </div>
+                <div class="task-container">
+                    <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="false"
+                                    [testMode]="true" [submit]="_submit" [cueIndex]="cueIndex"
+                                    [info]="info">
+                    </app-task-board>
+                    <div class="test-me-container" [ngClass]="{'test-me-container-six': isSixCandidates}">
+                        <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}" *ngIf="!timerMessage"
+                                (click)="submit()"> {{'Test AI (' + (cueIndex + 1) + '/2)'}} </button>
+                        <button class="btn btn-neutral btn-big" *ngIf="timerMessage" (click)="moveToNextCueManually()"> {{ timerMessage}}</button>
+                    </div>
+                    <div class="label hint" [ngClass]="{'no-clue': hint === '' || responseBackgroundColor}">
+                        {{hint}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-row">
+                <a>Maintained by Lampent</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+

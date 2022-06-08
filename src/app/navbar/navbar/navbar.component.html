@@ -1,0 +1,109 @@
+<nav
+        class="navbar navbar-expand-lg fixed-top navbar-transparent"
+        color-on-scroll="100"
+        id="navbar-top"
+>
+    <div class="container">
+        <div class="navbar-translate">
+            <a
+                    class="navbar-brand"
+                    placement="bottom"
+                    [routerLink]="['/']"
+                    target="GVLAB"
+                    (click)="onClick.emit('menu')"
+            >
+                <span> GVLAB• </span> Gamified Vision and Language Association Benchmark
+            </a>
+            <button
+                    aria-controls="navigation-index"
+                    aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler"
+                    [attr.aria-expanded]="!isCollapsed"
+                    (click)="isCollapsed = !isCollapsed"
+                    type="button"
+            >
+                <span class="navbar-toggler-bar bar1"> </span>
+                <span class="navbar-toggler-bar bar2"> </span>
+                <span class="navbar-toggler-bar bar3"> </span>
+            </button>
+        </div>
+        <div
+                class="navbar-collapse justify-content-end"
+                [collapse]="isCollapsed"
+                id="navigation"
+        >
+            <!--            <div class="navbar-collapse-header">-->
+            <!--                <div class="row">-->
+            <!--                    <div class="col-6 collapse-brand"><a> BLK• </a></div>-->
+            <!--                    <div class="col-6 collapse-close text-right">-->
+            <!--                        <button-->
+            <!--                                aria-controls="navigation-index"-->
+            <!--                                aria-label="Toggle navigation"-->
+            <!--                                class="navbar-toggler"-->
+            <!--                                [attr.aria-expanded]="!isCollapsed"-->
+            <!--                                (click)="isCollapsed = !isCollapsed"-->
+            <!--                                id="navigation"-->
+            <!--                                type="button"-->
+            <!--                        >-->
+            <!--                            <i class="tim-icons icon-simple-remove"> </i>-->
+            <!--                        </button>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <ul class="navbar-nav">
+                <li class="nav-item p-0">
+                    <a
+                            class="nav-link"
+                            href="https://github.com"
+                            placement="bottom"
+                            target="_blank"
+                    >
+                        <i class="fab fa-github"> </i>
+                        <p class="d-lg-none d-xl-none">Github</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                            class="nav-link"
+                            href="javascript:void(0)"
+                    >
+                        Paper
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                            [style]="{'color': selectedTab === 'explore' ? '#fd969e !important' : ''}"
+                            class="nav-link"
+                            (click)="onClick.emit('explore')"
+                            href="javascript:void(0)"
+                            [routerLink]="['/explore']"
+                    >
+                        Explore
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                            [style]="{'color': selectedTab === 'beat-the-ai' ? '#fd969e !important' : ''}"
+                            class="nav-link"
+                            href="javascript:void(0)"
+                            (click)="onClick.emit('beat-the-ai')"
+                            [routerLink]="['/beat-the-ai']"
+                    >
+                        BEAT THE AI
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a
+                            [style]="{'color': selectedTab === 'download' ? '#fd969e !important' : ''}"
+                            class="nav-link"
+                            href="javascript:void(0)"
+                            (click)="onClick.emit('download')"
+                            [routerLink]="['/download']"
+                    >
+                        <i class="tim-icons icon-cloud-download-93"> </i> Download
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

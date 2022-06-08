@@ -1,0 +1,40 @@
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <app-personal-details-form *ngIf="!personalDetails" (personalDetails$)="receivePersonalDetails($event)"></app-personal-details-form>
+        <div class="container center-container" *ngIf="geussTheAssociationsTask">
+            <div class="content-center brand" [ngClass]="{'content-center-six': isSixCandidates}">
+                <div class="task-container">
+                    <app-task-board class="analogies-board" [guessTheAssociationsTask]="geussTheAssociationsTask" [enablePointer]="false"
+                                    [testMode]="true" [submit]="_submit" [mturkMode]="true"
+                                    [info]="'Five images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'">
+                    </app-task-board>
+                    <div class="test-me-container" [ngClass]="{'test-me-container-six': isSixCandidates}">
+                        <button class="btn btn-neutral btn-big" [disabled]="qualificationIndex === 1 || hitSubmitted" (click)="moveLeft()">
+                            <li class="fas fa-arrow-left"></li>
+                        </button>
+                        <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}" [disabled]="solved" *ngIf="!allSubmitted"
+                                (click)="submit()"> {{'Submit'}} </button>
+                        <button class="btn btn-neutral btn-big" (click)="SubmitHIT()" [disabled]="hitSubmitted"  *ngIf="allSubmitted"> {{'Submit HIT'}}</button>
+                        <button class="btn btn-neutral btn-big" [disabled]="qualificationIndex === numberOfTasks || !solved || hitSubmitted" (click)="moveRight()">
+                            <li class="fas fa-arrow-right"></li>
+                        </button>
+                    </div>
+                    <div class="label hint" [ngClass]="{'no-clue': hint === ''}">
+                        {{hint}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-row">
+                <a>Maintained by Lampent</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+

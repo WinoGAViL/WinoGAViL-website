@@ -1,0 +1,154 @@
+<div class="personal-details-form-container">
+    <div class="personal-details-form" [ngClass]="{'instructions-form': !instructionsOk}">
+        <form [formGroup]="personalDetailsForm" (submit)="onSubmit($event)">
+            <div class="instructions" *ngIf="!instructionsOk && !isCreate">
+                Please do the qualification test <b>only once</b>.<br>
+                You will need to solve Visual Associations. Check out our <a href="https://gvlab-dataset.github.io/">project website</a>,
+                and try to solve the first example: Find two images associated with the word “Honey”!
+                <br>
+                <br>
+                Make sure to <a href="https://gvlab-dataset.github.io/beat-the-ai">exercise</a> before starting the qualification (Guess The Associations option).
+                <br>
+                <br>
+                Full HITs will be published for annotators who pass the test.<br><br>
+                Please send us an email with your worker ID when you finish the test: <a href="mailto:nlphuji@gmail.com">nlphuji@gmail.com</a>.
+            </div>
+            <div class="instructions" *ngIf="!instructionsOk && isCreate && experimentMode === experimentModes.DEFAULT">
+                Please do the qualification test <b>only once</b>.<br>
+                This time, your goal is to <b>create</b> visual associations that a rival AI cannot solve, but other humans can. You will need to compose a <b>new</b> cue for given images.
+                <br>
+                <br>
+                The new cue should: <br>(1) fool an AI model (be creative and difficult)<br> (2) still be solvable by other humans.
+                <br>
+                <br>
+                Make sure to <a href="https://gvlab-dataset.github.io/beat-the-ai">exercise</a> before starting the qualification (Give The Cue option).
+                <br>
+                <br>
+                Full HITs will be published for annotators who pass the test. We will inform you by mail.<br><br>
+                Please send us a message if anything is unclear: <a href="mailto:nlphuji@gmail.com">nlphuji@gmail.com</a>.
+            </div>
+
+            <div class="instructions" *ngIf="!instructionsOk && isCreate && experimentMode === experimentModes.NO_REWARD">
+                Please do the qualification test <b>only once</b>.<br>
+                Your goal is to <b>create</b> visual associations that a rival AI cannot solve, but other humans can. You will need to compose a <b>new</b> cue for given images.
+                <br>
+                <br>
+                The new cue should: <br>(1) fool an AI model (be creative and difficult)<br> (2) still be solvable by other humans.
+                <br>
+                <br>
+                Make sure to <a href="https://gvlab-dataset.github.io/beat-the-ai">exercise</a> before starting the qualification (Give The Cue option).
+                <br>
+                <br>
+                Full HITs will be published for annotators who pass the test. We will inform you by mail.<br><br>
+                Please send us a message if anything is unclear: <a href="mailto:nlphuji@gmail.com">nlphuji@gmail.com</a>.
+            </div>
+
+            <div class="instructions" *ngIf="!instructionsOk && isCreate && experimentMode === experimentModes.RG">
+                Please do the qualification test <b>only once</b>.<br>
+                Your goal is to <b>create</b> visual associations that a rival AI cannot solve, but other humans can. You will need to compose a <b>new</b> cue for given images.
+                <br>
+                <br>
+                The new cue should: <br>(1) fool an AI model (be creative and hard)<br> (2) still be solvable by other humans (<u>we will send your associations to other annotators to solve</u>).
+                <br>
+                <br>
+                Make sure to <a href="https://gvlab-dataset.github.io/beat-the-ai">exercise</a> before starting the qualification (Give The Cue option).
+                <br>
+                <br>
+                Full HITs will be published for annotators who pass the test. We will inform you by mail.<br><br>
+                <b>BONUS</b>: Given that 'solvable by human score' is above 80%, you will receive a bonus according to the 'fool-the-AI' score <b>for each of the associations you create</b>.
+                <br><br>
+                If 50% <= fool-the-ai-score < 60%, you will receive 0.03$.<br>
+                If 60% <= fool-the-ai-score < 67%, you will receive 0.07$.<br>
+                If 67% <= fool-the-ai-score < 80%, you will receive 0.12$.<br>
+                If 80% <= fool-the-ai-score, you will receive 0.18$.<br><br>
+                The bonuses will be paid retroactively, because we'll need to compute a solver score ('solvable by human score') for the associations you create.
+                <br>
+                <br>
+                Please send us a message if anything is unclear: <a href="mailto:nlphuji@gmail.com">nlphuji@gmail.com</a>.
+            </div>
+
+            <div class="instructions" *ngIf="!instructionsOk && isCreate && experimentMode === experimentModes.ONLY_HUMAN">
+                Please do the qualification test <b>only once</b>.<br>
+                Your goal is to <b>create</b> visual associations that a rival AI cannot solve, but other humans can. You will need to compose a <b>new</b> cue for given images.
+                <br>
+                <br>
+                The new cue should: <br><b>(1) be solvable by other humans</b> (<u>we will send your associations to other annotators to solve</u>).<br> (1) fool an AI model (be creative and hard)
+                <br>
+                <br>
+                Make sure to <a href="https://gvlab-dataset.github.io/beat-the-ai">exercise</a> before starting the qualification (Give The Cue option).
+                <br>
+                <br>
+                Full HITs will be published for annotators who pass the test. We will inform you by mail.<br><br>
+                <b>BONUS</b>: If 'solvable by human score' is above 90%, you will receive a bonus of 0.1$ <b>for each of the associations you create</b>.
+                <br><br>
+                The bonuses will be paid retroactively, because we'll need to compute a solver score ('solvable by human score') for the associations you create.
+                <br>
+                <br>
+                Please send us a message if anything is unclear: <a href="mailto:nlphuji@gmail.com">nlphuji@gmail.com</a>.
+            </div>
+
+            <div class="instructions" *ngIf="!instructionsOk && isCreate && experimentMode === experimentModes.ONLY_AI">
+                Please do the qualification test <b>only once</b>.<br>
+                Your goal is to <b>create</b> visual associations that a rival AI cannot solve, but other humans can. You will need to compose a <b>new</b> cue for given images.
+                <br>
+                <br>
+                The new cue should: <br><b>(1) fool an AI model (be creative and hard)</b><br> (2) still be solvable by other humans.
+                <br>
+                <br>
+                Make sure to <a href="https://gvlab-dataset.github.io/beat-the-ai">exercise</a> before starting the qualification (Give The Cue option).
+                <br>
+                <br>
+                Full HITs will be published for annotators who pass the test. We will inform you by mail.<br><br>
+                <b>BONUS</b>: You will receive a bonus according to the 'fool-the-AI' score <b>for each of the associations you create</b>.
+                <br><br>
+                If 50% <= fool-the-ai-score < 60%, you will receive 0.03$.<br>
+                If 60% <= fool-the-ai-score < 67%, you will receive 0.07$.<br>
+                If 67% <= fool-the-ai-score < 80%, you will receive 0.12$.<br>
+                If 80% <= fool-the-ai-score, you will receive 0.18$.<br><br>
+                The bonuses will be paid retroactively.
+                <br>
+                <br>
+                Please send us a message if anything is unclear: <a href="mailto:nlphuji@gmail.com">nlphuji@gmail.com</a>.
+            </div>
+            <mat-form-field appearance="fill" *ngIf="instructionsOk ">
+                <mat-label>Age</mat-label>
+                <mat-select [formControlName]="'ages'">
+                    <mat-option *ngFor="let age of ages" [value]="age.value">
+                        {{age.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="instructionsOk">
+                <mat-label>Gender</mat-label>
+                <mat-select  [formControlName]="'gender'">
+                    <mat-option *ngFor="let item of gender" [value]="item.value">
+                        {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="instructionsOk">
+                <mat-label>Level of Education</mat-label>
+                <mat-select [formControlName]="'education'">
+                    <mat-option *ngFor="let item of education" [value]="item.value">
+                        {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" *ngIf="instructionsOk">
+                <mat-label>Are you a native English speaker?</mat-label>
+                <mat-select [formControlName]="'speaker'">
+                    <mat-option *ngFor="let item of speaker" [value]="item.value">
+                        {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="button-container" *ngIf="instructionsOk">
+                <button mat-raised-button>Submit</button>
+            </div>
+
+        </form>
+        <div class="button-container" *ngIf="!instructionsOk">
+            <button mat-raised-button (click)="setInstructions()">OK</button>
+        </div>
+    </div>
+</div>

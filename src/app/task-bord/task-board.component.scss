@@ -1,0 +1,283 @@
+.analogy-container {
+  width: 125%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board {
+  display: flex;
+}
+
+.no-underline-mat-field ::ng-deep  .mat-form-field-underline  {
+    visibility: hidden !important;
+}
+
+.top-board {
+  width: 600px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.main-description {
+  color: black;
+  position: absolute;
+  right: -260px;
+  width: 420px;
+  bottom: 80px;
+  background: #feebec;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 0.2rem rgb(0 0 0 / 30%);
+}
+
+.left-board, .right-board {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.associations-board, .cue-board {
+  width: 310px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.example-full-width {
+  width: 280px;
+}
+
+::ng-deep .mat-form-field-flex {
+  padding: 0 !important;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  text-align: center;
+}
+
+.images-board {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fas {
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+@media (max-width: 630px) {
+  .top-board {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 800px) {
+  .analogy-image-container {
+    flex: 1 0 99% !important; /* explanation below */
+  }
+
+  .center-separator {
+    display: none !important;
+  }
+}
+
+.analogy-image-container {
+  flex: 1 0 20%; /* explanation below */
+  height: auto;
+  width: auto;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.analogy-image-container-six {
+  flex: 1 0 33%; /* explanation below */
+  height: auto;
+  width: auto;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.analogy-image-container-twelve {
+  flex: 1 0 25% !important; ; /* explanation below */
+  height: auto;
+  width: auto;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.label {
+  color: #4d5568;
+}
+
+.board-title {
+  font-size: 2rem;
+  font-family: "Cambria Math", serif;
+}
+
+input, .bold-text {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+}
+
+.shake {
+  animation-name: shake-animation;
+  animation-duration: 0.3s;
+}
+
+@keyframes shake-animation {
+  10%, 90% {
+    transform: translate3d(-0.5px, 0, 0);
+  }
+
+  20%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(3px, 0, 0);
+  }
+}
+
+
+.remove-pointer {
+  display: none !important;
+}
+
+@media (max-width: 1375px) {
+  .pointer-container {
+    display: none !important;
+  }
+}
+
+.pointer-container {
+  color: black;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  left: -160px;
+}
+
+.moving-pointer {
+  font-weight: 500 !important;
+  font-size: 80px;
+  animation-name: moving-pointer;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  color: black;
+}
+
+.AI-response-label-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.AI-response-label {
+  color: #666666;
+  font-size: 30px;
+}
+
+.AI-response-label > img {
+  width: 50px;
+  height: 50px;
+}
+
+@keyframes moving-pointer {
+  from {
+    margin-left: 20px;
+  }
+
+  to {
+    margin-right: 30px;
+  }
+}
+
+
+.pointer-label {
+  font-size: 19px;
+}
+
+
+img {
+  width: 237px;
+  height: 237px;
+  border: 2px transparent solid;
+}
+
+.separator-label {
+  text-align: center;
+  font-size: 100px;
+  color: black;
+}
+
+.fa-info-circle {
+  color: #fd969e;
+  font-size: 40px;
+  position: absolute;
+  right: -70px;
+  text-shadow: 2px 5px rgb(0 0 0 / 3%);
+  cursor: pointer;
+}
+
+.right-board-container {
+  padding-bottom: 15px;
+  box-shadow: 0 0 0.2rem rgb(0 0 0 / 30%);
+}
+
+.left-board-container {
+  padding-top: 0;
+  box-shadow: 0 0 0.2rem rgb(0 0 0 / 30%);
+}
+
+.center-separator {
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.candidate-selected {
+  border: #ff8d72 solid 5px;
+}
+
+.AI-selected {
+  border: #ffdc00 solid 5px;
+}
+
+.alerts-border {
+  border: #ff8d72 solid 5px;
+
+  animation: blink 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  50% {
+    border-color: #fff;
+  }
+}
+
+//Material
+::ng-deep .mat-form-field-flex {
+  background-color: transparent !important;
+}
+

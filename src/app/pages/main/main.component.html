@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <div class="container center-container">
+            <div class="content-center brand">
+                <h4 class="h1-seo" >GVLAB: Gamified Vision and Language Association Benchmark
+
+                </h4>
+                <h3 style="padding-top: 2rem">
+                    Five images are presented below.
+                    <br/>
+                    A cue word and number of associated images are given.
+                    <br/>
+                    Choose the images that best associates with the cue word.
+                    <br/>
+                </h3>
+                <app-task-board class="analogies-board" [guessTheAssociationsTask]="task" [enablePointer]="true"> </app-task-board>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="section">
+            <div class="container stats-container">
+                <div class="stats-lower-label">
+                    Go to <a class="stats-page-ref" href="./beat-the-ai">BEAT THE AI</a> page to play the associations games against a rival AI<br/>
+                </div>
+                <div class="stats-row">
+                    <div class="stats-block">
+                        <div class="stat-label">5K+</div>
+                        <div class="stat-description">Associations</div>
+                    </div>
+                    <div class="stats-block">
+                        <div class="stat-label">4</div>
+                        <div class="stat-description">Modalities Combinations</div>
+                    </div>
+                    <div class="stats-block">
+                        <div class="stat-label">90%</div>
+                        <div class="stat-description">Human Successes Rate</div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="section">
+            <div class="container">
+                <h3 class="mb-5 sub-title">Paper</h3>
+                <div class="abstract">
+                    <img src="/assets/img/abstract.JPG" />
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div id="images">
+                    <h3 class="mb-5 sub-title">Authors</h3>
+                    <div class="row">
+                        <div class="col-sm-3 col-6 mt-5 mt-sm-0">
+                            <small class="d-block text-uppercase font-weight-bold mb-4">
+                                Charizard
+                            </small>
+                            <img
+                                    alt="Raised image"
+                                    class="img-fluid rounded shadow-lg"
+                                    src="/assets/img/charizard.png"
+                                    style="width: 150px;"
+                            />
+                        </div>
+                        <div class="col-sm-3 col-6 mt-5 mt-sm-0">
+                            <small class="d-block text-uppercase font-weight-bold mb-4">
+                                Lampent
+                            </small>
+                            <img
+                                    alt="Raised image"
+                                    class="img-fluid rounded shadow-lg"
+                                    src="/assets/img/lampent.png"
+                                    style="width: 150px;"
+                            />
+                        </div>
+                        <div class="col-sm-3 col-6 mt-5 mt-sm-0">
+                            <small class="d-block text-uppercase font-weight-bold mb-4">
+                                Pikachu
+                            </small>
+                            <img
+                                    alt="Raised image"
+                                    class="img-fluid rounded shadow-lg"
+                                    src="/assets/img/pikachu.jpg"
+                                    style="width: 150px;"
+                            />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-row">
+                    <a>Maintained by Lampent</a>
+            </div>
+        </div>
+    </footer>
+</div>

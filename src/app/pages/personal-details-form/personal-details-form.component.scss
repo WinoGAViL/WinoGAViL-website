@@ -1,0 +1,47 @@
+.personal-details-form {
+  max-height: 555px !important;
+  overflow-y: scroll;
+}
+
+.mat-form-field {
+  width: 100% !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instructions {
+  color: black;
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 450px) {
+  .instructions-form {
+    width: 300px !important;
+  }
+
+  .personal-details-form {
+    top: 50% !important;
+  }
+}
+
+@media (max-width: 540px) {
+  ::ng-deep .mat-select-panel {
+    width: 300px !important;
+    min-width: 300px !important;;
+  }
+
+  ::ng-deep .cdk-overlay-pane {
+    transform: translateX(-42px) translateY(-55px) !important;
+  }
+
+}
+
+
+.instructions-form {
+  width: 415px;
+}

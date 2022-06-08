@@ -1,0 +1,104 @@
+<app-navbar (onClick)="onNavbarClick($event)"></app-navbar>
+<div class="wrapper">
+    <div class="page-header header-filter">
+        <div class="container center-container">
+            <div class="content-center brand">
+                <h3 class="main-label" [ngClass]="{'padding-bottom': !gameMode}" *ngIf="!isGuessAssociationsTask">
+                    BEAT THE AI
+                </h3>
+                <div class="label hint"
+                     [style]="{'background-color': responseBackgroundColor, visibility: responseBackgroundColor ? 'visible' : 'hidden', color: responseTextColor}"
+                     [ngClass]="{'guess-clue-hint': isGuessAssociationsTask === false}">
+                    {{hint}}
+                </div>
+                <div class="task-container" *ngIf="gameMode">
+                    <app-task-board class="analogies-board" [guessTheAssociationsTask]="guessTheAssociationsTask"
+                                    [enablePointer]="true" [testMode]="gameMode" [submit]="_submit"
+                                    [info]="'Five images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'"
+                                    *ngIf="isGuessAssociationsTask === true && this.guessTheAssociationsTask"></app-task-board>
+                    <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="true"
+                                    [testMode]="gameMode" [submit]="_submit"
+                                    [info]="giveTheCueInfo"
+                                    *ngIf="isGuessAssociationsTask === false && this.giveTheCueTask"></app-task-board>
+                    <div class="test-me-container">
+                        <div>
+                            <div [style]="{'color': 'black !important'}">Candidates </div>
+                            <select (change)="onCandidatesSelect($event.target.value)" >
+                                <option *ngFor="let candidate of candidates" [value]="candidate.value" [style.color]="'black'">
+                                    {{candidate.viewValue}}
+                                </option>
+                            </select>
+                        </div>
+                        <button class="btn btn-neutral btn-big" [disabled]="exampleIndex === 1" (click)="moveLeft()">
+                            <li class="fas fa-arrow-left"></li>
+                        </button>
+                        <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}"
+                                (click)="submit()">{{ isGuessAssociationsTask ? 'Test Me' : 'Test AI' }}</button>
+                        <button class="btn btn-neutral btn-big" (click)="restartPractice()">
+                            <li class="fas fa-redo-alt"></li>
+                        </button>
+                        <button class="btn btn-neutral btn-big" (click)="moveRight()">
+                            <li class="fas fa-arrow-right"></li>
+                        </button>
+                    </div>
+                    <div class="label hint" [ngClass]="{'no-clue': hint === '' || responseBackgroundColor}">
+                        <i style="color: red" class="fas fa-times"
+                           *ngIf="isGuessAssociationsTask && hint != '' && hint != goodJobHint"></i>
+                        <i style="color: green" class="fas fa-check"
+                           *ngIf="isGuessAssociationsTask && hint == goodJobHint"></i>
+                        {{hint}}
+                    </div>
+                </div>
+
+                <div class="explore-nav" *ngIf="!gameMode">
+
+                    <div class="practice-box">
+                        <div class="practice-title">Give The Cue</div>
+                        <div class="practice-text">
+                            <div class="text-row">
+                                Five images are presented below.
+                                Choose several images and enter a cue word.
+                            </div>
+                            <div class="text-row">
+                                The AI will try to guess which of the images associate with your cue.
+                            </div>
+                            <button class="btn btn-neutral" (click)="practice(false)">Practice</button>
+                        </div>
+                    </div>
+
+                    <div class="practice-box">
+                        <div class="practice-title">Guess The Associations</div>
+                        <div class="practice-text">
+                            <div class="text-row">
+                                Five images are presented below.
+                                A cue word and a number are given:
+                                (𝐶𝑢𝑒, #𝐴𝑠𝑠𝑜𝑐𝑖𝑎𝑡𝑖𝑜𝑛𝑠)
+                            </div>
+                            <div class="text-row">
+                                Choose #𝐴𝑠𝑠𝑜𝑐𝑖𝑎𝑡𝑖𝑜𝑛𝑠 images that associate with the 𝐶𝑢𝑒 word.
+                            </div>
+                            <button class="btn btn-neutral" (click)="practice(true)">Practice</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="got-it-container" *ngIf="!gameMode">
+                    <div class="got-it-title"> Got It!</div>
+                    <div class="text-row"> Let's play the combined game!</div>
+                    <i class="fas fa-play fas-big" (click)="play()"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-row">
+                <a>Maintained by Lampent</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
