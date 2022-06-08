@@ -38,6 +38,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
     guessTheAssociationsTask: GuessTheAssociationsTask;
     giveTheCueInfo = '';
     selectedCandidates = 5;
+    showReportForm = false;
     candidates = [
         {value: '5', viewValue: '5'},
         {value: '6', viewValue: '6'},
@@ -82,6 +83,23 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
         this.isGuessAssociationsTask = null;
         this.exampleIndex = 1;
         this.initExample(1)
+    }
+
+
+    closeReportForm($event) {
+        this.showReportForm = false;
+    }
+
+    onReportFormSubmit(details) {
+        try {
+            details.task = (this.isGuessAssociationsTask ? this.guessTheAssociationsTask.getJSON() : this.giveTheCueTask.getJSON());
+            details.userID = '';
+            this.serverRequestService.sendReportForm(details)
+        } catch (error) {
+            console.log('Failed to send report form')
+            console.log(error)
+        }
+        this.showReportForm = false;
     }
 
     initExample(index: number) {

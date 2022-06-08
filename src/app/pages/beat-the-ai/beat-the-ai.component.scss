@@ -222,6 +222,21 @@ h1, h3 {
   cursor: pointer;
 }
 
+.report-container {
+  left: 0;
+  position: absolute;
+  color: black;
+  margin-top: 4px;
+  margin-left: 55px;
+}
+
+.fa-triangle-exclamation {
+  color: #ff3e3e;
+  font-size: 40px;
+  text-shadow: 2px 5px rgb(0 0 0 / 3%);
+  cursor: pointer;
+}
+
 .task-container ::ng-deep .btn-big {
   font-size: 1.5rem;
 }

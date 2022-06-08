@@ -1,0 +1,25 @@
+<div class="personal-details-form-container">
+    <div class="personal-details-form" [ngClass]="{'instructions-form': !instructionsOk}">
+        <i class="fa-solid fa-circle-xmark" (click)="close$.emit()"></i>
+        <form [formGroup]="personalDetailsForm" (submit)="onSubmit($event)">
+            <div class="input-label main-label">Please fill in the following details and submit them if you encounter a problem. Our team will review the report form and act accordingly.</div>
+            <div class="input-label">Please select the report reason </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Report reason</mat-label>
+                <mat-select [formControlName]="'reason'">
+                    <mat-option *ngFor="let age of ages" [value]="age.value">
+                        {{age.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="input-label">Please provide a short description of the problem </div>
+            <mat-form-field appearance="fill" class="fill-container">
+                <textarea [formControl]="$any(personalDetailsForm.controls.details)"  matInput [matTextareaAutosize]="false"></textarea>
+            </mat-form-field>
+            <div class="button-container">
+                <button mat-raised-button>Submit</button>
+            </div>
+
+        </form>
+    </div>
+</div>

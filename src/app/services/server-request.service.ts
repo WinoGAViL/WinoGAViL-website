@@ -78,4 +78,10 @@ export class ServerRequestService {
             task.setScore(response[0].human_score, cueIndex)
         })
     }
+
+    sendReportForm(data: object) {
+        this.httpService.post('https://gvlab-backend.herokuapp.com/report', JSON.stringify(data)).subscribe((response: any) => {
+            console.log('Report form was sent')
+        })
+    }
 }

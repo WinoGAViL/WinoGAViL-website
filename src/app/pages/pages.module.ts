@@ -34,6 +34,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {beatTheAI, beatTheAICreate, beatTheAISolve, solveCratePath} from '../app-routing.module';
 import {NavbarComponent} from '../navbar/navbar/navbar.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReportFormComponent } from './report-form/report-form.component';
 
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
@@ -93,7 +94,8 @@ const routes: Routes = [
     MturkSolveComponent,
     MturkCreateQualificationComponent,
     MturkSolveQualificationComponent,
-    PersonalDetailsFormComponent
+    PersonalDetailsFormComponent,
+    ReportFormComponent
   ],
   exports: [
     MainComponent,
