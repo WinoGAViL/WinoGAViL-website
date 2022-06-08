@@ -1,4 +1,0 @@
-[submodule "public-2"]
-	path = public-2
-	url = https://github.com/GVLAB-dataset/GVLAB-dataset.github.io.git
-	branch = main
