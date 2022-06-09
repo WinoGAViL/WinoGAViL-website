@@ -22,7 +22,8 @@ const headers = new HttpHeaders({
 });
 
 function getImagePath(imgName: string) {
-    return awsURL+imgName+'.jpg';
+    // return awsURL+imgName+'.jpg';
+    return imgName
 }
 
 
