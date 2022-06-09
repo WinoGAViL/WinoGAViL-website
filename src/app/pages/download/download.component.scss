@@ -54,12 +54,30 @@ h1, h3 {
   font-size: 2rem;
 }
 
+@media (max-width: 400px) {
+  :host::ng-deep .nav {
+    flex-direction: column;
+
+  }
+}
+
 .explore-nav {
   width: 120%;
   justify-content: space-between;
   align-items: center;
   display: flex;
   padding-bottom: 3rem;
+}
+
+.nav-tabs-danger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+::ng-deep .tab-content {
+  width: 100%;
 }
 
 
@@ -70,13 +88,22 @@ h1, h3 {
 
 .card {
   background: #fbfbff;
-  height: 15rem;
+  height: 36rem;
+  width: 100%;
+  text-align: left;
 }
 
 @media (max-width: 800px) {
   .card {
     height: auto;
   }
+}
+
+.highlight {
+  padding: 0.5rem;
+  background-color: rgba(0,0,0,0.1);
+  border: 1px solid black;
+  border-radius: 5px;
 }
 
 .download-icon {
@@ -86,10 +113,7 @@ h1, h3 {
 
 .card-header {
   height: 100%;
-  display: flex;
   color: black;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .row {
@@ -112,8 +136,6 @@ h1, h3 {
 
 
 .button-container {
-  padding-bottom: 1rem;
-  padding-top: 4rem;
-  display: flex;
-  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

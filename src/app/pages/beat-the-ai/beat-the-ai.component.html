@@ -1,11 +1,11 @@
-<app-navbar (onClick)="onNavbarClick($event)"></app-navbar>
+<app-navbar (click)="onNavbarClick($event)"></app-navbar>
 <div class="wrapper">
     <div class="page-header header-filter">
         <app-report-form *ngIf="showReportForm" (close$)="closeReportForm($event)" (submit$)="onReportFormSubmit($event)"></app-report-form>
         <div class="container center-container">
             <div class="content-center brand">
                 <h3 class="main-label" [ngClass]="{'padding-bottom': !gameMode}" *ngIf="!isGuessAssociationsTask">
-                    BEAT THE AI
+                    Challenge the AI
                 </h3>
                 <div class="label hint"
                      [style]="{'background-color': responseBackgroundColor, visibility: responseBackgroundColor ? 'visible' : 'hidden', color: responseTextColor}"

@@ -75,9 +75,15 @@ input {
   margin-top: 10px;
 }
 
-@media (max-width: 630px) {
-  .top-board {
-    flex-direction: column;
+@media (max-width: 850px) {
+  .fa-info-circle {
+    right: 135px !important;
+    bottom: -74px;
+  }
+
+  .main-description {
+    right: -21px !important;
+    width: 350px;
   }
 }
 
@@ -228,6 +234,8 @@ img {
   font-size: 100px;
   color: black;
 }
+
+
 
 .fa-info-circle {
   color: #fd969e;

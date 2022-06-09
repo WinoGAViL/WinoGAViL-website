@@ -10,9 +10,9 @@
                     placement="bottom"
                     [routerLink]="['/']"
                     target="WinoGAViL"
-                    (click)="onClick.emit('menu')"
+                    (click)="click.emit('menu')"
             >
-                <span> WinoGAViL• </span> Gamified Association Benchmark to Challenge Vision-and-Language Models
+                <span> WinoGAViL</span> <a class="title-description"><b>•</b> Gamified Association Benchmark to Challenge Vision-and-Language Models</a>
             </a>
             <button
                     aria-controls="navigation-index"
@@ -74,7 +74,7 @@
                     <a
                             [style]="{'color': selectedTab === 'explore' ? '#fd969e !important' : ''}"
                             class="nav-link"
-                            (click)="onClick.emit('explore')"
+                            (click)="click.emit('explore')"
                             href="javascript:void(0)"
                             [routerLink]="['/explore']"
                     >
@@ -86,10 +86,10 @@
                             [style]="{'color': selectedTab === 'beat-the-ai' ? '#fd969e !important' : ''}"
                             class="nav-link"
                             href="javascript:void(0)"
-                            (click)="onClick.emit('beat-the-ai')"
-                            [routerLink]="['/beat-the-ai']"
+                            (click)="click.emit('beat-the-ai')"
+                            [routerLink]="['/challenge-the-ai']"
                     >
-                        BEAT THE AI
+                        Challenge the AI
                     </a>
                 </li>
                 <li class="nav-item">
@@ -97,7 +97,7 @@
                             [style]="{'color': selectedTab === 'download' ? '#fd969e !important' : ''}"
                             class="nav-link"
                             href="javascript:void(0)"
-                            (click)="onClick.emit('download')"
+                            (click)="click.emit('download')"
                             [routerLink]="['/download']"
                     >
                         <i class="tim-icons icon-cloud-download-93"> </i> Download

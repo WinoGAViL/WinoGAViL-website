@@ -117,6 +117,17 @@ h1, h3 {
   padding-bottom: 5rem;
 }
 
+@media (max-width: 600px) {
+  .practice-box {
+    width: 100% !important;
+    height: 400px !important;
+  }
+
+  .explore-nav {
+    flex-direction: column;
+  }
+}
+
 .practice-box {
   width: 45%;
   height: 300px;

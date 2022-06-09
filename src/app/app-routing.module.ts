@@ -12,8 +12,8 @@ import {MturkCreateQualificationComponent} from './pages/mturk-create-qualificat
 import {MturkSolveQualificationComponent} from './pages/mturk-solve-qualification/mturk-solve-qualification.component';
 
 export const solveCratePath = 'mturk/solve/create/:id';
-export const beatTheAI = 'beat-the-ai';
-export const beatTheAICreate = 'beat-the-ai/create';
+export const beatTheAI = 'challenge-the-ai';
+export const beatTheAICreate = 'challenge-the-ai/create';
 export const beatTheAISolve = 'explore';
 
 const routes: Routes = [

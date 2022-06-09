@@ -1,6 +1,14 @@
+.col-6 {
+  padding-bottom: 30px !important;
+}
 
 h1, h3 {
   color: #4d5568 !important;
+}
+
+.img-fluid {
+  width: 150px;
+  height: 203.469px;
 }
 
 .stats-row {
@@ -10,6 +18,10 @@ h1, h3 {
   justify-content: space-around;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
   margin: auto;
+}
+
+:host ::ng-deep small {
+  margin-bottom: 0.5rem !important
 }
 
 .stats-block {
