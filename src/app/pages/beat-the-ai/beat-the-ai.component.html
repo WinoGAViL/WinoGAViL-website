@@ -15,7 +15,7 @@
                 <div class="task-container" *ngIf="gameMode">
                     <app-task-board class="analogies-board" [guessTheAssociationsTask]="guessTheAssociationsTask"
                                     [enablePointer]="true" [testMode]="gameMode" [submit]="_submit"
-                                    [info]="'Five images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'"
+                                    [info]="'Several images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'"
                                     *ngIf="isGuessAssociationsTask === true && this.guessTheAssociationsTask"></app-task-board>
                     <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="true"
                                     [testMode]="gameMode" [submit]="_submit"
@@ -62,7 +62,7 @@
                         <div class="practice-title">Give The Cue</div>
                         <div class="practice-text">
                             <div class="text-row">
-                                Five images are presented below.
+                                Several images are presented below.
                                 Choose several images and enter a cue word.
                             </div>
                             <div class="text-row">
@@ -76,7 +76,7 @@
                         <div class="practice-title">Guess The Associations</div>
                         <div class="practice-text">
                             <div class="text-row">
-                                Five images are presented below.
+                                Several images are presented below.
                                 A cue word and a number are given:
                                 (𝐶𝑢𝑒, #𝐴𝑠𝑠𝑜𝑐𝑖𝑎𝑡𝑖𝑜𝑛𝑠)
                             </div>

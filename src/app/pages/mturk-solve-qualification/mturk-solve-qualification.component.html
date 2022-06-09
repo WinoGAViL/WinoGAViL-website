@@ -6,7 +6,7 @@
                 <div class="task-container">
                     <app-task-board class="analogies-board" [guessTheAssociationsTask]="geussTheAssociationsTask" [enablePointer]="false"
                                     [testMode]="true" [submit]="_submit" [mturkMode]="true"
-                                    [info]="'Five images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'">
+                                    [info]="'Several images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'">
                     </app-task-board>
                     <div class="test-me-container" [ngClass]="{'test-me-container-six': isSixCandidates}">
                         <button class="btn btn-neutral btn-big" [disabled]="qualificationIndex === 1 || hitSubmitted" (click)="moveLeft()">
