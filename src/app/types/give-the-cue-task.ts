@@ -47,7 +47,7 @@ export class GiveTheCueTask implements Jsonable {
         if (prediction && prediction.length >= 2) {
             this.receivedAIResponse[cueIndex] = true;
             this.candidates[cueIndex].forEach((candidate: Candidate) => prediction
-                .filter(image => image.toLowerCase() === candidate.img.split('/').slice(-1)[0].toLowerCase()).length && (candidate.answer = true));
+                .filter(image => image.toLowerCase() === candidate.name).length && (candidate.answer = true));
         } else {
             console.warn('Predictions received are not valid')
             console.warn(prediction)
@@ -130,9 +130,9 @@ export class GiveTheCueTask implements Jsonable {
     }
 
     getPredictionFormat(cueIndex: number): object {
-        const images = this.candidates[cueIndex].map((candidate) => candidate.img.split('/').slice(-1)[0].toLowerCase())
+        const images = this.candidates[cueIndex].map((candidate) => candidate.name)
         const userAssociations = this.candidates[cueIndex].filter((candidate) => candidate.userChoice)
-                .map((candidate) => candidate.img.split('/').slice(-1)[0].toLowerCase());
+                .map((candidate) => candidate.name);
         const annotations: any[] = [
             {cue: this._userCue.value[cueIndex], num_associations: userAssociations.length, labels: userAssociations},
         ]

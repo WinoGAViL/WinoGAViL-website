@@ -15,6 +15,18 @@
     visibility: hidden !important;
 }
 
+@media (max-width: 610px) {
+  .top-board {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .cue-board {
+    height: 120px !important;
+  }
+}
+
 .top-board {
   width: 600px;
   justify-content: space-between;
@@ -77,13 +89,23 @@ input {
 
 @media (max-width: 850px) {
   .fa-info-circle {
-    right: 135px !important;
+    left:0 !important;
+    right:0 !important;
+
+    margin-left: auto;
+    margin-right: auto;
     bottom: -74px;
   }
 
   .main-description {
-    right: -21px !important;
-    width: 350px;
+    left:0;
+    right:0;
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 298px;
+    bottom: -250px;
+    z-index: 9999;
   }
 }
 

@@ -37,17 +37,14 @@ export class ServerRequestService {
         // const url = example ? `https://gvlab-backend.herokuapp.com/task/example/create/${id}` : `https://gvlab-backend.herokuapp.com/task/mturk/create/${id}`
         const url = `https://gvlab-backend.herokuapp.com/task/mturk/create/${id}`
         return this.httpService.get<any>(url).pipe(map((task) => {
-            // task.candidates = [...task.candidates, 'sea', 'island', 'food', "sunset", "sandwich", "movie", "book"]
-            return new GiveTheCueTask([task.candidates.map(img => new Candidate(getImagePath(img))), task.candidates.map(img => new Candidate(getImagePath(img)))], ['', ''], task.id);
+            return this.createNewGiveTheCueTask(task);
         }));
     }
 
     getRandomGiveTheCue(candidates = 5): Observable<GiveTheCueTask> {
         const url = `https://gvlab-backend.herokuapp.com/task/example/random_create/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
-            // task.candidates = [...task.candidates, 'sea', 'island', 'food', "sunset", "sandwich", "movie", "book"]
-            const id = task.ID === undefined ? task.id : task.ID
-            return new GiveTheCueTask([task.candidates.map(img => new Candidate(getImagePath(img))), task.candidates.map(img => new Candidate(getImagePath(img)))], ['', ''], id);
+            return this.createNewGiveTheCueTask(task);
         }));
     }
 
@@ -55,25 +52,21 @@ export class ServerRequestService {
         // const url = example ? `https://gvlab-backend.herokuapp.com/task/example/solve/${id}` : `https://gvlab-backend.herokuapp.com/task/mturk/solve/${id}`
         const url = `https://gvlab-backend.herokuapp.com/task/mturk/solve_create/${id}`
         return this.httpService.get<any>(url).pipe(map((task) => {
-            // task.candidates = [...task.candidates, 'sea', 'island', 'food', "sunset", "sandwich", "movie", "book"]
-            return new GuessTheAssociationsTask(task.candidates.map(img => new Candidate(getImagePath(img), task.associations.includes(img))), [task.cue], task.num_associations, task.id);
+            return this.createNewGuessTheAssociationsTask(task);
         }));
     }
 
     getRandomGuessTheAssociationTask(candidates = 5): Observable<GuessTheAssociationsTask> {
         const url = `https://gvlab-backend.herokuapp.com/task/example/random_solve/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
-            // task.candidates = [...task.candidates, 'sea', 'island', 'food', "sunset", "sandwich", "movie", "book"]
-            const id = task.ID === undefined ? task.id : task.ID
-            return new GuessTheAssociationsTask(task.candidates.map(img => new Candidate(getImagePath(img), task.associations.includes(img))), [task.cue], task.num_associations, id);
+            return this.createNewGuessTheAssociationsTask(task);
         }));
     }
 
     getCreateGuessTheAssociationTask(id): Observable<GuessTheAssociationsTask> {
         const url = `https://gvlab-backend.herokuapp.com/task/mturk/solve_create/${id}`
         return this.httpService.get<any>(url).pipe(map((task) => {
-            // task.candidates = [...task.candidates, 'sea', 'island', 'food', "sunset", "sandwich", "movie", "book"]
-            return new GuessTheAssociationsTask(task.candidates.map(img => new Candidate(getImagePath(img), task.associations.includes(img))), [task.cue], task.num_associations, task.id);
+            return this.createNewGuessTheAssociationsTask(task);
         }));
     }
 
@@ -88,5 +81,15 @@ export class ServerRequestService {
         this.httpService.post('https://gvlab-backend.herokuapp.com/report', JSON.stringify(data), {headers}).subscribe((response: any) => {
             console.log('Report form was sent')
         })
+    }
+
+    createNewGuessTheAssociationsTask(task): GuessTheAssociationsTask {
+        const id = task.ID === undefined ? task.id : task.ID
+        return new GuessTheAssociationsTask(task.candidates.map((img, index) => new Candidate(getImagePath(img), task.candidates_original[index], task.associations.includes(img))), [task.cue], task.num_associations, id);
+    }
+
+    createNewGiveTheCueTask(task): GiveTheCueTask {
+        const id = task.ID === undefined ? task.id : task.ID
+        return new GiveTheCueTask([task.candidates.map((img, index) => new Candidate(getImagePath(img), task.candidates_original[index])), task.candidates.map((img, index) => new Candidate(getImagePath(img), task.candidates_original[index]))], ['', ''], id);
     }
 }

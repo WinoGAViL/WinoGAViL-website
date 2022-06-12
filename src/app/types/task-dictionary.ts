@@ -51,6 +51,6 @@ export function getGuessTheAssociationsTask(cue): GuessTheAssociationsTask {
 
 // examples
 
-guessTheAssociationsDictionary.set('example-1', new GuessTheAssociationsTask([new Candidate(assetsImgPath + 'bear.JPG', true), new Candidate(assetsImgPath + 'drums.JPG'),
-        new Candidate(assetsImgPath + 'bride.JPG'), new Candidate(assetsImgPath + 'hockey.JPG'), new Candidate(assetsImgPath + 'bee.JPG', true)],
-    ['Honey'], 2))
+guessTheAssociationsDictionary.set('example-1', new GuessTheAssociationsTask([new Candidate(assetsImgPath + 'drugs.png','drugs'), new Candidate(assetsImgPath + 'film.jpg', 'film'),
+        new Candidate(assetsImgPath + 'puppy.jpg', 'puppy', true), new Candidate(assetsImgPath + 'needle.jpeg', 'needle'), new Candidate(assetsImgPath + 'venus.png', 'venus', true)],
+    ['werewolf'], 2))

@@ -21,11 +21,11 @@ import {screens} from '../../types/screens';
     styleUrls: ['./beat-the-ai.component.scss']
 })
 export class BeatTheAiComponent implements OnInit, OnDestroy {
-    isCollapsed = true;
     hint = ''
     answers: Map<number, Candidate> = new Map<number, Candidate>();
     gameMode = false;
     practiceMode = false;
+    isCollapsed = true;
     _submit = false;
     goodJobHint = 'Good Job!';
     timerSubscription = new Subscription()
@@ -58,17 +58,6 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.changeDetectorRef.detectChanges();
-
-        const body = document.getElementsByTagName('body')[0];
-        body.classList.add('index-page');
-
-
-        window.scroll({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
-
         window.name = 'WinoGAViL'
         if (this.activeRouter.snapshot.routeConfig.path === beatTheAICreate) {
             this.practice(false)
@@ -78,6 +67,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
     }
 
     init() {
+        this.showReportForm = false;
         this.gameMode = false;
         this.practiceMode = false;
         this.isGuessAssociationsTask = null;
