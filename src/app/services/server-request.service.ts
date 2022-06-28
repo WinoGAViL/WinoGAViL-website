@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Candidate} from '../types/candidate';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {GiveTheCueTask} from '../types/give-the-cue-task';
 import {GuessTheAssociationsTask} from '../types/guess-the-associations-task';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 
 // mock
 
@@ -48,6 +48,16 @@ export class ServerRequestService {
         }));
     }
 
+    getRandomGameGiveTheCue(candidates = 5): Observable<GiveTheCueTask> {
+        const url = `http://127.0.0.1:5000/game_random_create/${candidates}`;
+        return this.httpService.get<any>(url, {withCredentials: true}).pipe(
+            map((task) => {
+                return this.createNewGiveTheCueTask(task);
+            }), catchError(err => {
+                return of(err)
+            }));
+    }
+
     getGuessTheAssociationTask(id, example: boolean=false): Observable<GuessTheAssociationsTask> {
         // const url = example ? `https://gvlab-backend.herokuapp.com/task/example/solve/${id}` : `https://gvlab-backend.herokuapp.com/task/mturk/solve/${id}`
         const url = `https://gvlab-backend.herokuapp.com/task/mturk/solve_create/${id}`
@@ -60,6 +70,15 @@ export class ServerRequestService {
         const url = `https://gvlab-backend.herokuapp.com/task/example/random_solve/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
             return this.createNewGuessTheAssociationsTask(task);
+        }));
+    }
+
+    getRandomGameGuessTheAssociationTask(candidates = 5): Observable<GuessTheAssociationsTask> {
+        const url = `http://127.0.0.1:5000/get_create_to_solve/${candidates}`;
+        return this.httpService.get<any>(url).pipe(map((task) => {
+            return this.createNewGuessTheAssociationsTask(task);
+        }), catchError(err => {
+            return of(err)
         }));
     }
 

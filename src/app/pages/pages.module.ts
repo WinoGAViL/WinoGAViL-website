@@ -31,15 +31,17 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { PersonalDetailsFormComponent } from './personal-details-form/personal-details-form.component';
 import {MatButtonModule} from '@angular/material/button';
-import {beatTheAI, beatTheAICreate, beatTheAISolve, solveCratePath} from '../app-routing.module';
+import {beatTheAI, beatTheAICreate, beatTheAIGame, beatTheAISolve, solveCratePath} from '../app-routing.module';
 import {NavbarComponent} from '../navbar/navbar/navbar.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReportFormComponent } from './report-form/report-form.component';
+import { BeatTheAiGameComponent } from './beat-the-ai-game/beat-the-ai-game.component';
 
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
   { path: beatTheAISolve, component: BeatTheAiComponent },
+  { path: beatTheAIGame, component: BeatTheAiGameComponent },
   { path: 'download', component: DownloadComponent },
   { path: 'mturk/create/:id', component: MturkCreateComponent },
   { path: 'mturk/solve/:id', component: MturkSolveComponent },
@@ -47,9 +49,9 @@ const routes: Routes = [
   { path: 'mturk/qualification/create', component: MturkCreateQualificationComponent },
   { path: 'mturk/qualification/solve', component: MturkSolveQualificationComponent },
   { path: 'mturk/qualification/rg/create', component: MturkCreateQualificationComponent },
-    { path: 'mturk/qualification/rg/ai/create', component: MturkCreateQualificationComponent },
+  { path: 'mturk/qualification/rg/ai/create', component: MturkCreateQualificationComponent },
   { path: 'mturk/qualification/oa/create', component: MturkCreateQualificationComponent },
-    { path: 'mturk/qualification/oa/ai/create', component: MturkCreateQualificationComponent },
+  { path: 'mturk/qualification/oa/ai/create', component: MturkCreateQualificationComponent },
   { path: 'mturk/qualification/oh/create', component: MturkCreateQualificationComponent },
     { path: 'mturk/qualification/oh/ai/create', component: MturkCreateQualificationComponent },
   { path: 'mturk/qualification/nr/create', component: MturkCreateQualificationComponent },
@@ -95,7 +97,8 @@ const routes: Routes = [
     MturkCreateQualificationComponent,
     MturkSolveQualificationComponent,
     PersonalDetailsFormComponent,
-    ReportFormComponent
+    ReportFormComponent,
+    BeatTheAiGameComponent
   ],
   exports: [
     MainComponent,

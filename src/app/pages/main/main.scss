@@ -95,7 +95,19 @@ a {
   padding-top: 9rem;
 }
 
+.uni-logo, .bgu-logo,.unc-logo {
+  margin-right: 7px;
+  height: 30px;
+  width: 23px;
+}
 
+.bgu-logo, .unc-logo {
+  width: 30px !important;
+}
+
+.flex {
+  display: flex !important;
+}
 
 .h1-seo {
   padding-top: 4rem;

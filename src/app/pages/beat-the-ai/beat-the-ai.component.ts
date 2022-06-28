@@ -12,7 +12,7 @@ import {
 import {GuessTheAssociationsTask} from '../../types/guess-the-associations-task';
 import {pluck, takeUntil, tap} from 'rxjs/operators';
 import {cueCalculator} from '../../types/cue-calculator';
-import {beatTheAICreate, beatTheAISolve} from '../../app-routing.module';
+import {beatTheAICreate, beatTheAIGame, beatTheAISolve} from '../../app-routing.module';
 import {screens} from '../../types/screens';
 
 @Component({
@@ -39,6 +39,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
     giveTheCueInfo = '';
     selectedCandidates = 5;
     showReportForm = false;
+    beatTheAIMode = false;
     candidates = [
         {value: '5', viewValue: '5'},
         {value: '6', viewValue: '6'},
@@ -147,7 +148,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
     }
 
     play(): void {
-        this.init()
+        this.router.navigateByUrl(beatTheAIGame)
     }
 
     submit(): void {
@@ -194,6 +195,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
     }
 
     moveRight() {
+        this.serverRequestService.getRandomGameGiveTheCue().subscribe(test => console.log(test))
         this.exampleIndex++;
         this.move()
     }

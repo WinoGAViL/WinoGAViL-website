@@ -10,10 +10,12 @@ import {MturkCreateComponent} from './pages/mturk-create/mturk-create.component'
 import {MturkSolveComponent} from './pages/mturk-solve/mturk-solve.component';
 import {MturkCreateQualificationComponent} from './pages/mturk-create-qualification/mturk-create-qualification.component';
 import {MturkSolveQualificationComponent} from './pages/mturk-solve-qualification/mturk-solve-qualification.component';
+import {BeatTheAiGameComponent} from './pages/beat-the-ai-game/beat-the-ai-game.component';
 
 export const solveCratePath = 'mturk/solve/create/:id';
 export const beatTheAI = 'challenge-the-ai';
 export const beatTheAICreate = 'challenge-the-ai/create';
+export const beatTheAIGame = 'game';
 export const beatTheAISolve = 'explore';
 
 const routes: Routes = [
@@ -23,6 +25,7 @@ const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
   { path: beatTheAISolve, component: BeatTheAiComponent },
+  { path: beatTheAIGame, component: BeatTheAiGameComponent },
   { path: 'mturk/create/:id', component: MturkCreateComponent },
   { path: 'mturk/solve/:id', component: MturkSolveComponent },
   { path: solveCratePath, component: MturkSolveComponent },
