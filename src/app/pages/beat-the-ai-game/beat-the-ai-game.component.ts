@@ -6,7 +6,7 @@ import {GuessTheAssociationsTask} from '../../types/guess-the-associations-task'
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ServerRequestService} from '../../services/server-request.service';
-import {filter, share, take, takeUntil} from 'rxjs/operators';
+import {delay, filter, map, takeUntil} from 'rxjs/operators';
 import {cueCalculator} from '../../types/cue-calculator';
 import {screens} from '../../types/screens';
 import {createExampleIndexIDMap, solveExampleIndexIDMap} from '../../types/task-dictionary';
@@ -37,6 +37,8 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   selectedCandidates = 5;
   showReportForm = false;
   loggedIn = false;
+  enterUserName = false;
+  loading = false;
   candidates = [
     {value: '5', viewValue: '5'},
     {value: '6', viewValue: '6'},
@@ -56,12 +58,27 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.authService.userLoggedIn$.pipe(filter(isLoggedIn => !!isLoggedIn), take(1)).subscribe(() => {
-      this.loggedIn = true;
-      window.name = 'WinoGAViL'
-      this.practice(false)
-      this.changeDetectorRef.detectChanges();
+    this.loading = true
+    this.authService.userLoggedIn$.pipe(filter(isLoggedIn => isLoggedIn !== null)).subscribe((isLoggedIn) => {
+      this.authService.isUserExists().pipe(delay(500), map(data => data.user_exists)).subscribe((userExists) => {
+        this.loading = false;
+        this.loggedIn = isLoggedIn
+        if (userExists && isLoggedIn) {
+          this.logIn()
+        } else {
+          this.enterUserName = !isLoggedIn ? false : this.enterUserName;
+        }
+        this.changeDetectorRef.markForCheck()
+        this.changeDetectorRef.detectChanges()
+      })
     })
+  }
+
+  logIn() {
+    this.loggedIn = true;
+    window.name = 'WinoGAViL'
+    this.practice(false)
+    this.changeDetectorRef.detectChanges();
   }
 
   init() {
@@ -127,14 +144,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   }
 
   getTaskFromServer(index: number): Observable<any> {
-    const response: Observable<any> = !this.isGuessAssociationsTask ? this.serverRequestService.getRandomGameGiveTheCue(this.selectedCandidates) : this.serverRequestService.getRandomGameGiveTheCue(this.selectedCandidates)
-    response.pipe(share()).subscribe((err) => {
-      if (err?.status === 401) {
-        window.location.href = 'http://127.0.0.1:5000/login'
-
-      }
-    })
-    return response
+    return !this.isGuessAssociationsTask ? this.serverRequestService.getRandomGameGiveTheCue(this.selectedCandidates) : this.serverRequestService.getRandomGameGiveTheCue(this.selectedCandidates)
     // const id = this.getQualificationId(index);
     // if (id === undefined) {
     //   const response$: Observable<any> = !this.isGuessAssociationsTask ? this.serverRequestService.getRandomGameGiveTheCue(this.selectedCandidates) : this.serverRequestService.getRandomGameGuessTheAssociationTask(this.selectedCandidates)
@@ -209,6 +219,10 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
     this.initExample(this.exampleIndex);
     this.gameMode = true;
     this.practiceMode = true;
+  }
+
+  onRegister() {
+    this.loggedIn = false;
   }
 
 }

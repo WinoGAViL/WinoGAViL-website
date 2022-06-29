@@ -1,5 +1,5 @@
 <app-navbar [isCollapsed]="isCollapsed" (click)="onNavbarClick($event)"></app-navbar>
-<app-login-form *ngIf="!loggedIn"></app-login-form>
+<app-login-form *ngIf="!loggedIn" [enterUserName]="enterUserName" [loading]="loading" (registeredSuccessfully$)="onRegister()"></app-login-form>
 <div class="wrapper">
     <div class="page-header header-filter" *ngIf="loggedIn">
         <app-report-form *ngIf="showReportForm" (close$)="closeReportForm($event)" (submit$)="onReportFormSubmit($event)"></app-report-form>

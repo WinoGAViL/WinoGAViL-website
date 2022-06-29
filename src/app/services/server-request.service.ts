@@ -5,6 +5,7 @@ import {Observable, of} from 'rxjs';
 import {GiveTheCueTask} from '../types/give-the-cue-task';
 import {GuessTheAssociationsTask} from '../types/guess-the-associations-task';
 import {catchError, map} from 'rxjs/operators';
+import {AuthService} from './auth.service';
 
 // mock
 
@@ -30,7 +31,8 @@ function getImagePath(imgName: string) {
 @Injectable()
 export class ServerRequestService {
 
-    constructor(private httpService: HttpClient) {
+    constructor(private httpService: HttpClient,
+                private authService: AuthService) {
     }
 //        new GiveTheCueTask([response.candidates.map(img => new Candidate(img)), response.candidates.map(img => new Candidate(img))], ['', ''], response.id)
     getGiveTheCue(id, example: boolean=false): Observable<GiveTheCueTask> {
@@ -54,6 +56,9 @@ export class ServerRequestService {
             map((task) => {
                 return this.createNewGiveTheCueTask(task);
             }), catchError(err => {
+                if (err.status === 401) {
+                    this.authService.userLoggedIn$.next(false)
+                }
                 return of(err)
             }));
     }

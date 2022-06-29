@@ -3,8 +3,9 @@ import {Injectable} from '@angular/core';
 import firebase from 'firebase';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import {AngularFireAuth} from '@angular/fire/auth';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, of} from 'rxjs';
 import OAuthProvider = firebase.auth.OAuthProvider;
+import {HttpClient} from '@angular/common/http';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,11 +26,12 @@ export const firebaseConfig = {
 
 @Injectable()
 export class AuthService {
-    userLoggedIn$ = new BehaviorSubject<boolean>(false)
+    userLoggedIn$ = new BehaviorSubject<boolean>(null)
     userToken$ = new BehaviorSubject<string>('');
     shouldLogin = false;
 
-    constructor(private afAuth: AngularFireAuth) {
+    constructor(private afAuth: AngularFireAuth,
+                private httpClient: HttpClient) {
         // const app = initializeApp(firebaseConfig);
         // const analytics = getAnalytics(app);
     }
@@ -42,7 +44,7 @@ export class AuthService {
         }
 
         this.afAuth.onAuthStateChanged((user) => {
-            user.getIdToken().then(idToken =>  {
+            user.getIdToken().then(idToken => {
                 this.userLoggedIn$.next(!!user);
                 this.userToken$.next(idToken)
                 console.log(this.userToken$.value)
@@ -70,6 +72,16 @@ export class AuthService {
         return this.AuthLogin(new GoogleAuthProvider());
     }
 
+    registerUser(username) {
+        const url = `http://localhost:1234/register_player`;
+        return this.httpClient.post<any>(url, {player_name: username}, {withCredentials: true})
+    }
+
+    isUserExists() {
+        const url = `http://localhost:1234/player_status`;
+        return this.httpClient.get<any>(url, {withCredentials: true})
+    }
+
     private AuthLogin(provider) {
         this.afAuth.signInWithRedirect(provider).then((result) => {
             console.log(result)
@@ -81,7 +93,7 @@ export class AuthService {
 
     private extractCookies(cookieStr) {
         const output = {};
-        cookieStr.split(/\s*;\s*/).forEach(function(pair) {
+        cookieStr.split(/\s*;\s*/).forEach(function (pair) {
             pair = pair.split(/\s*=\s*/);
             output[pair[0]] = pair.splice(1).join('=');
         });

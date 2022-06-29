@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import ConfettiGenerator from 'confetti-js';
 import {Candidate} from '../types/candidate';
 import {FormControl} from '@angular/forms';
@@ -39,7 +39,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
     cueValueChangesSubscription = new Subscription();
     cueValueChangedSubscription = new Subscription();
 
-    constructor() {
+    constructor(private changeDetectionRef: ChangeDetectorRef) {
     }
 
     @Input()
@@ -61,8 +61,8 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
         if (this.isGuessAssociationsTask) {
             this.cueFormControl.setValue(this._guessAssociationTask.cue[0])
         } else {
-            this.cueValueChangesSubscription.unsubscribe()
             this._giveCueTask._userCue.pipe(take(1)).subscribe((userCues) => this.cueFormControl.setValue(userCues[this._cueIndex]))
+            this.cueValueChangesSubscription.unsubscribe()
             this.cueValueChangesSubscription = this.cueFormControl.valueChanges.pipe(debounceTime(200), distinctUntilChanged(), switchMap((val) => {
                 if (/^[a-zA-Z]*$/.test(val)) {
                     this._giveCueTask.setUserCue(val, this._cueIndex)
@@ -109,6 +109,8 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
                     this.renderConfetti()
                 }
             }
+            this.changeDetectionRef.markForCheck()
+            this.changeDetectionRef.detectChanges()
         }
     }
 

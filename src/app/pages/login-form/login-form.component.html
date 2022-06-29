@@ -1,14 +1,43 @@
 <div class="personal-details-form-container">
-    <div class="personal-details-form flex-between" [ngClass]="{'instructions-form': !instructionsOk}">
-        <h1> <b> Login </b></h1>
+    <div class="lds-roller" *ngIf="loading">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="personal-details-form flex-between" *ngIf="!enterUserName && !loading"
+         [ngClass]="{'instructions-form': !instructionsOk}">
+        <h1><b> Login </b></h1>
         <div class="login-button-container flex-center">
             <div class="google-btn" (click)="login('google')">
                 <div class="google-icon-wrapper">
-                    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                    <img class="google-icon"
+                         src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
                 </div>
                 <p class="btn-text"><b>Sign in with google</b></p>
             </div>
             <img class="yahoo-btn" src='assets/img/yahoo-login-btn.png' (click)="login('yahoo')">
         </div>
+    </div>
+    <div class="personal-details-form flex-between" *ngIf="enterUserName && !loading"
+         [ngClass]="{'instructions-form': !instructionsOk}">
+        <div style="margin-bottom: 35px">
+            This is your first time signing in, please enter a username.
+            The user name will be used in the leaderboard.
+        </div>
+        <form style="width: 266px" [formGroup]="userDetailsForm" (submit)="onSubmit($event)">
+            <mat-form-field appearance="fill" class="fill-container">
+                <input matInput [formControl]="$any(userDetailsForm.controls.username)">
+            </mat-form-field>
+            <div class="button-container">
+                <button mat-raised-button type="submit" class="btn btn-neutral btn-big">Submit</button>
+            </div>
+            <div class="hint">{{hint}}</div>
+
+        </form>
     </div>
 </div>
