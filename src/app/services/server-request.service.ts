@@ -36,20 +36,20 @@ export class ServerRequestService {
     getGiveTheCue(id, example: boolean=false): Observable<GiveTheCueTask> {
         // const url = example ? `https://gvlab-backend.herokuapp.com/task/example/create/${id}` : `https://gvlab-backend.herokuapp.com/task/mturk/create/${id}`
         const url = `https://gvlab-backend.herokuapp.com/task/mturk/create/${id}`
-        return this.httpService.get<any>(url).pipe(map((task) => {
+        return this.httpService.get<any>(url, { withCredentials: true }).pipe(map((task) => {
             return this.createNewGiveTheCueTask(task);
         }));
     }
 
     getRandomGiveTheCue(candidates = 5): Observable<GiveTheCueTask> {
-        const url = `https://gvlab-backend.herokuapp.com/task/example/random_create/${candidates}`;
+        const url = `http://localhost:1234/task/example/random_create/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
             return this.createNewGiveTheCueTask(task);
         }));
     }
 
     getRandomGameGiveTheCue(candidates = 5): Observable<GiveTheCueTask> {
-        const url = `http://127.0.0.1:5000/game_random_create/${candidates}`;
+        const url = `http://localhost:1234/game_random_create/${candidates}`;
         return this.httpService.get<any>(url, {withCredentials: true}).pipe(
             map((task) => {
                 return this.createNewGiveTheCueTask(task);
@@ -74,7 +74,7 @@ export class ServerRequestService {
     }
 
     getRandomGameGuessTheAssociationTask(candidates = 5): Observable<GuessTheAssociationsTask> {
-        const url = `http://127.0.0.1:5000/get_create_to_solve/${candidates}`;
+        const url = `http://localhost:1234/get_create_to_solve/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
             return this.createNewGuessTheAssociationsTask(task);
         }), catchError(err => {

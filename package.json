@@ -71,6 +71,7 @@
     "@angular/common": "11.0.5",
     "@angular/compiler": "11.0.5",
     "@angular/core": "11.0.5",
+    "@angular/fire": "^6.1",
     "@angular/forms": "11.0.5",
     "@angular/material": "11.0.4",
     "@angular/platform-browser": "11.0.5",
@@ -79,6 +80,7 @@
     "chart.js": "2.9.4",
     "confetti-js": "0.0.18",
     "core-js": "3.8.2",
+    "firebase": "^8.0.0",
     "gulp": "^4.0.2",
     "gulp-inline": "^0.1.3",
     "inline": "0.0.2",
@@ -110,6 +112,13 @@
     "protractor": "7.0.0",
     "ts-node": "9.1.1",
     "tslint": "6.1.3",
-    "typescript": "4.0.3"
+    "typescript": "4.0.3",
+    "@angular-devkit/architect": ">= 0.900 < 0.1300",
+    "firebase-tools": "^8.0.0 || ^9.0.0",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "open": "^7.0.3",
+    "jsonc-parser": "^3.0.0"
   }
 }

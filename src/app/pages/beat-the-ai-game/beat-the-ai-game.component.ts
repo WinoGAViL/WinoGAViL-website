@@ -6,10 +6,11 @@ import {GuessTheAssociationsTask} from '../../types/guess-the-associations-task'
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ServerRequestService} from '../../services/server-request.service';
-import {share, takeUntil} from 'rxjs/operators';
+import {filter, share, take, takeUntil} from 'rxjs/operators';
 import {cueCalculator} from '../../types/cue-calculator';
 import {screens} from '../../types/screens';
 import {createExampleIndexIDMap, solveExampleIndexIDMap} from '../../types/task-dictionary';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-beat-the-ai-game',
@@ -35,6 +36,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   giveTheCueInfo = '';
   selectedCandidates = 5;
   showReportForm = false;
+  loggedIn = false;
   candidates = [
     {value: '5', viewValue: '5'},
     {value: '6', viewValue: '6'},
@@ -45,6 +47,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private activeRouter: ActivatedRoute,
+              public authService: AuthService,
               private changeDetectorRef: ChangeDetectorRef,
               private dialog: MatDialog,
               private serverRequestService: ServerRequestService
@@ -53,9 +56,12 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.changeDetectorRef.detectChanges();
-    window.name = 'WinoGAViL'
-    this.practice(false)
+    this.authService.userLoggedIn$.pipe(filter(isLoggedIn => !!isLoggedIn), take(1)).subscribe(() => {
+      this.loggedIn = true;
+      window.name = 'WinoGAViL'
+      this.practice(false)
+      this.changeDetectorRef.detectChanges();
+    })
   }
 
   init() {
@@ -85,7 +91,6 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   }
 
   initExample(index: number) {
-    timer(10000).subscribe(() => {
       this.cancel$.next();
       this._submit = false;
       this.showHint('')
@@ -96,10 +101,12 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
       } else {
         this.getTaskFromServer(index).pipe(takeUntil(this.cancel$)).subscribe((task) => {
           this.giveTheCueTask = task;
+          console.log(this.giveTheCueTask)
           this.giveTheCueInfo = cueCalculator(task);
+          this.changeDetectorRef.markForCheck()
+          this.changeDetectorRef.detectChanges()
         })
       }
-    })
   }
 
   onNavbarClick(event: screens) {
@@ -185,13 +192,6 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
     });
   }
 
-  // moveLeft() {
-  //   if (this.exampleIndex > 1) {
-  //     this.exampleIndex--;
-  //     this.move()
-  //   }
-  // }
-
   moveRight() {
     this.isGuessAssociationsTask = !((this.exampleIndex - 1) % 3)
     this.exampleIndex++;
@@ -210,4 +210,5 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
     this.gameMode = true;
     this.practiceMode = true;
   }
+
 }

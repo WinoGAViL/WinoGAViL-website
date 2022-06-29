@@ -1,6 +1,7 @@
 <app-navbar [isCollapsed]="isCollapsed" (click)="onNavbarClick($event)"></app-navbar>
+<app-login-form *ngIf="!loggedIn"></app-login-form>
 <div class="wrapper">
-    <div class="page-header header-filter">
+    <div class="page-header header-filter" *ngIf="loggedIn">
         <app-report-form *ngIf="showReportForm" (close$)="closeReportForm($event)" (submit$)="onReportFormSubmit($event)"></app-report-form>
         <div class="container center-container">
             <div class="content-center brand">
@@ -32,9 +33,6 @@
                                 </option>
                             </select>
                         </div>
-<!--                        <button class="btn btn-neutral btn-big" [disabled]="exampleIndex === 1" (click)="moveLeft()">-->
-<!--                            <li class="fas fa-arrow-left"></li>-->
-<!--                        </button>-->
                         <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}"
                                 (click)="submit()">{{ isGuessAssociationsTask ? 'Test Me' : 'Test AI' }}</button>
                         <button class="btn btn-neutral btn-big" (click)="restartPractice()">

@@ -36,12 +36,15 @@ import {NavbarComponent} from '../navbar/navbar/navbar.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReportFormComponent } from './report-form/report-form.component';
 import { BeatTheAiGameComponent } from './beat-the-ai-game/beat-the-ai-game.component';
-
+import {AuthService, firebaseConfig} from '../services/auth.service';
+import {AngularFireModule} from '@angular/fire';
+import { LoginFormComponent } from './login-form/login-form.component';
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
   { path: beatTheAISolve, component: BeatTheAiComponent },
-  { path: beatTheAIGame, component: BeatTheAiGameComponent },
+  // { path: beatTheAIGame, component: BeatTheAiGameComponent, canActivate: [AuthGuard] },
+  { path: beatTheAIGame, component: BeatTheAiGameComponent},
   { path: 'download', component: DownloadComponent },
   { path: 'mturk/create/:id', component: MturkCreateComponent },
   { path: 'mturk/solve/:id', component: MturkSolveComponent },
@@ -62,6 +65,7 @@ const routes: Routes = [
 @NgModule({
     imports: [
         CommonModule,
+        AngularFireModule.initializeApp(firebaseConfig),
         BrowserModule,
         FormsModule,
         MatDialogModule,
@@ -98,7 +102,8 @@ const routes: Routes = [
     MturkSolveQualificationComponent,
     PersonalDetailsFormComponent,
     ReportFormComponent,
-    BeatTheAiGameComponent
+    BeatTheAiGameComponent,
+    LoginFormComponent
   ],
   exports: [
     MainComponent,
@@ -106,6 +111,12 @@ const routes: Routes = [
     TaskBoardComponent,
     RouterModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: document.getElementsByTagName('base')[0].href}]
+  providers: [
+      AuthService,
+      {provide: APP_BASE_HREF, useValue: document.getElementsByTagName('base')[0].href}]
 })
-export class PagesModule {}
+export class PagesModule {
+    constructor(private authService: AuthService) {
+        this.authService.init();
+    }
+}

@@ -1,0 +1,38 @@
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+
+@Component({
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss']
+})
+export class LoginFormComponent implements OnInit {
+  @Input() skipPersonalDetails: boolean = false;
+  @Output() submit$: EventEmitter<{reason: string, details: string}> = new EventEmitter<{reason: string, details: string}>()
+  @Output() close$: EventEmitter<void> = new EventEmitter<void>()
+  ages: any[] = [{ value: 'inappropriateImage', viewValue: 'Inappropriate Image'}, { value: 'missingImage', viewValue: 'Missing Image'},
+    { value: 'inappropriateCue', viewValue: 'Inappropriate Cue'}, { value: 'other', viewValue: 'Other'}]
+  personalDetailsForm: FormGroup;
+  instructionsOk = false;
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.personalDetailsForm = this.fb.group({
+      reason: ['', Validators.required],
+      details: ['', Validators.required],
+    })
+  }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(event) {
+    if (this.personalDetailsForm.valid) {
+      this.submit$.next(this.personalDetailsForm.value);
+      console.log(this.personalDetailsForm.value);
+    }
+  }
+
+  login(provider: 'yahoo' | 'google') {
+    this.authService.login(provider)
+  }
+}

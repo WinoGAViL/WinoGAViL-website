@@ -1,0 +1,136 @@
+.personal-details-form {
+  max-height: 555px !important;
+  overflow-y: scroll;
+}
+
+.mat-form-field {
+  width: 100% !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.instructions {
+  color: black;
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 450px) {
+  .instructions-form {
+    width: 300px !important;
+  }
+
+  .personal-details-form {
+    top: 50% !important;
+  }
+}
+
+.fa-circle-xmark {
+  position: absolute;
+  right: 0;
+  font-size: 18px;
+  margin-top: -5px;
+  color: #000000b8;
+  cursor: pointer;
+}
+
+:host ::ng-deep .mat-form-field-flex {
+  background-color: #f0f0f0 !important;
+}
+
+@media (max-width: 540px) {
+  ::ng-deep .mat-select-panel {
+    width: 300px !important;
+    min-width: 300px !important;;
+  }
+
+  ::ng-deep .cdk-overlay-pane {
+    transform: translateX(-42px) translateY(-55px) !important;
+  }
+
+}
+
+.main-label {
+  font-weight: 600;
+}
+
+.input-label {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.fill-container ::ng-deep textarea {
+  height: 120px;
+}
+
+h1 {
+  padding-top: 5px;
+  padding-bottom: 12px;
+}
+
+.login-button-container {
+  padding-bottom: 10px;
+}
+
+.instructions-form {
+  width: 320px;
+}
+
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669F2;
+
+.yahoo-btn {
+  cursor: pointer;
+  width: 184px;
+  height: 42px;
+  background-color: $google-blue;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+}
+
+
+.google-btn {
+  margin-bottom: 12px;
+  cursor: pointer;
+  width: 184px;
+  height: 42px;
+  background-color: $google-blue;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: $white;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: $white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+  }
+  &:hover {
+    box-shadow: 0 0 6px $google-blue;
+  }
+  &:active {
+    background: $button-active-blue;
+  }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
