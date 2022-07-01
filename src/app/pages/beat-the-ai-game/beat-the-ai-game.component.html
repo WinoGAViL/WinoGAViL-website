@@ -11,8 +11,10 @@
                     {{hint}}
                 </div>
                 <div class="task-container" *ngIf="gameMode">
+                    <app-no-more-tasks-modal *ngIf="noMoreTasksToSolve"></app-no-more-tasks-modal>
                     <app-task-board class="analogies-board" [guessTheAssociationsTask]="guessTheAssociationsTask"
                                     [enablePointer]="true" [testMode]="gameMode" [submit]="_submit"
+                                    [disableSolutionIcons]="true"
                                     [info]="'Several images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'"
                                     *ngIf="isGuessAssociationsTask === true && this.guessTheAssociationsTask"></app-task-board>
                     <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="true"
@@ -24,7 +26,6 @@
                             <div><i class="fas fa-solid fa-triangle-exclamation" [style.color]="'red'" (click)="showReportForm=true"> </i></div>
                             Report
                         </div>
-
                         <div>
                             <div [style]="{'color': 'black !important'}">Candidates </div>
                             <select (change)="onCandidatesSelect($event.target.value)" #candidatesOptionElement>
@@ -34,19 +35,15 @@
                             </select>
                         </div>
                         <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}"
-                                (click)="submit()">{{ isGuessAssociationsTask ? 'Test Me' : 'Test AI' }}</button>
-                        <button class="btn btn-neutral btn-big" (click)="restartPractice()">
-                            <li class="fas fa-redo-alt"></li>
-                        </button>
+                                (click)="submit()">{{ isGuessAssociationsTask ? 'Solve' : 'Test AI' }}</button>
+<!--                        <button class="btn btn-neutral btn-big" (click)="restartPractice()">-->
+<!--                            <li class="fas fa-redo-alt"></li>-->
+<!--                        </button>-->
                         <button class="btn btn-neutral btn-big" (click)="moveRight()">
                             <li class="fas fa-arrow-right"></li>
                         </button>
                     </div>
                     <div class="label hint" [ngClass]="{'no-clue': hint === '' || responseBackgroundColor}">
-                        <i style="color: red" class="fas fa-times"
-                           *ngIf="isGuessAssociationsTask && hint != '' && hint != goodJobHint"></i>
-                        <i style="color: green" class="fas fa-check"
-                           *ngIf="isGuessAssociationsTask && hint == goodJobHint"></i>
                         {{hint}}
                     </div>
                 </div>

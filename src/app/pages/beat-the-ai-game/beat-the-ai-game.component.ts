@@ -40,6 +40,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   providerLoggedIn = false;
   enterUserName = false;
   loading = false;
+  noMoreTasksToSolve = false;
   candidates = [
     {value: '5', viewValue: '5'},
     {value: '6', viewValue: '6'},
@@ -119,13 +120,21 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
       this.showHint('')
       if (this.isGuessAssociationsTask) {
         this.getTaskFromServer(index).pipe(takeUntil(this.cancel$)).subscribe((task) => {
-          this.selectedCandidates = task?.candidates?.length || 5;
-          this.candidatesOptionElement.nativeElement.value = this.selectedCandidates;
-          this.guessTheAssociationsTask = task;
-          this.detectChanges();
+          if (!(task instanceof Error)) {
+            this.noMoreTasksToSolve = false;
+            this.selectedCandidates = task?.candidates?.length || 5;
+            this.candidatesOptionElement.nativeElement.value = this.selectedCandidates;
+            this.guessTheAssociationsTask = task;
+            this.detectChanges();
+          } else {
+            this.guessTheAssociationsTask = null
+            this.noMoreTasksToSolve = true;
+            this.detectChanges();
+          }
         })
       } else {
         this.getTaskFromServer(index).pipe(takeUntil(this.cancel$)).subscribe((task) => {
+          this.noMoreTasksToSolve = false;
           this.giveTheCueTask = task;
           console.log(this.giveTheCueTask)
           this.giveTheCueInfo = cueCalculator(task);
@@ -176,10 +185,10 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this._submit = (this.isGuessAssociationsTask ? this.guessTheAssociationsTask?.isTaskSolved() : this.giveTheCueTask?.isTaskSolved())
+    this._submit = (this.isGuessAssociationsTask ? this.guessTheAssociationsTask?.isTaskSolved(true) : this.giveTheCueTask?.isTaskSolved())
     if (this._submit) {
       if (this.isGuessAssociationsTask) {
-        this.showHint(this.goodJobHint)
+        this.serverRequestService.solveGame(this.guessTheAssociationsTask)
       } else {
         this.showHint(`Waiting for AI prediction`, Math.pow(10, 10))
         this.giveTheCueTask.getFilteredScore().pipe(takeUntil(this.cancel$)).subscribe((score) => {
@@ -197,8 +206,9 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
       }
       console.log(this.isGuessAssociationsTask ? this.guessTheAssociationsTask : this.giveTheCueTask)
     } else {
-      this.showHint(this.isGuessAssociationsTask ? this.guessTheAssociationsTask?.getHint() : this.giveTheCueTask?.getHint())
+      this.showHint(this.isGuessAssociationsTask ? this.guessTheAssociationsTask?.getHint(true) : this.giveTheCueTask?.getHint())
     }
+    this.detectChanges();
   }
 
   showHint(hint, time: number = 3000, responseBackgroundColor = '', responseTextColor = 'black') {
@@ -214,7 +224,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   }
 
   moveRight() {
-    this.isGuessAssociationsTask = !!(this.exampleIndex % 3)
+    this.isGuessAssociationsTask = !!(this.exampleIndex % 4)
     this.exampleIndex++;
     this.move()
   }

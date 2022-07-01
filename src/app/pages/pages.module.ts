@@ -39,6 +39,7 @@ import { BeatTheAiGameComponent } from './beat-the-ai-game/beat-the-ai-game.comp
 import {AuthService, firebaseConfig} from '../services/auth.service';
 import {AngularFireModule} from '@angular/fire';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { NoMoreTasksModalComponent } from './no-more-tasks-modal/no-more-tasks-modal.component';
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
@@ -103,7 +104,8 @@ const routes: Routes = [
     PersonalDetailsFormComponent,
     ReportFormComponent,
     BeatTheAiGameComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    NoMoreTasksModalComponent
   ],
   exports: [
     MainComponent,

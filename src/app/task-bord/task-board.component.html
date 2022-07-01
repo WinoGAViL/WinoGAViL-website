@@ -42,16 +42,16 @@
                      'alerts-border': candidate.userChoice && !candidate.answer && !isGuessAssociationsTask && _giveCueTask.receivedAIResponse[_cueIndex]}">
                     <i [style.color]="(candidate.userChoice && candidate.userChoice !== candidate.answer) ? 'red' : 'transparent'"
                        class="fas fa-times"
-                       *ngIf="(!mturkMode && (testMode ? _submit : true)) && isGuessAssociationsTask && (candidate.userChoice !== candidate.answer) "></i>
+                       *ngIf="(!disableSolutionIcons && (testMode ? _submit : true)) && isGuessAssociationsTask && (candidate.userChoice !== candidate.answer) "></i>
                     <i [style.color]="(candidate.answer && candidate.userChoice !== candidate.answer) ? 'red' : 'transparent'"
                        class="fas fa-times"
-                       *ngIf="(!mturkMode && (testMode ? _submit : true)) && (!isGuessAssociationsTask && _giveCueTask.receivedAIResponse[_cueIndex]) && (candidate.userChoice !== candidate.answer) "></i>
+                       *ngIf="(!disableSolutionIcons && (testMode ? _submit : true)) && (!isGuessAssociationsTask && _giveCueTask.receivedAIResponse[_cueIndex]) && (candidate.userChoice !== candidate.answer) "></i>
                     <i [style.color]="(candidate.userChoice && candidate.userChoice === candidate.answer) ? 'green' : 'transparent'"
                        class="fas fa-check"
-                       *ngIf="(!mturkMode && (testMode ? _submit : true)) && isGuessAssociationsTask && (candidate.userChoice === candidate.answer)"></i>
+                       *ngIf="(!disableSolutionIcons && (testMode ? _submit : true)) && isGuessAssociationsTask && (candidate.userChoice === candidate.answer)"></i>
                     <i [style.color]="(candidate.answer && candidate.userChoice === candidate.answer) ? 'green' : 'transparent'"
                        class="fas fa-check"
-                       *ngIf="(!mturkMode && (testMode ? _submit : true)) && (!isGuessAssociationsTask && _giveCueTask.receivedAIResponse[_cueIndex]) && (candidate.userChoice === candidate.answer)"></i>
+                       *ngIf="(!disableSolutionIcons && (testMode ? _submit : true)) && (!isGuessAssociationsTask && _giveCueTask.receivedAIResponse[_cueIndex]) && (candidate.userChoice === candidate.answer)"></i>
                 </div>
                 <div class="pointer-container" *ngIf="noSelection && enablePointer">
                     <div style="position:relative; width: 110px;">

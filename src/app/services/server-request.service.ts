@@ -112,6 +112,13 @@ export class ServerRequestService {
         })
     }
 
+    solveGame(task: GuessTheAssociationsTask): void {
+        const url = 'http://localhost:1234/solve_game'
+        this.httpService.post(url, task.getSolveFormat(), {withCredentials: true}).subscribe((response: any) => {
+            console.log('Solved successfully')
+        })
+    }
+
     sendReportForm(data: object) {
         this.httpService.post('https://gvlab-backend.herokuapp.com/report', JSON.stringify(data), {headers}).subscribe((response: any) => {
             console.log('Report form was sent')

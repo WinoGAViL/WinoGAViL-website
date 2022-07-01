@@ -27,7 +27,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
     isTwelveCandidates = false;
     @Input() enableSelection = true;
     @Input() testMode = false;
-    @Input() mturkMode = false;
+    @Input() disableSolutionIcons = false;
     @Input() _submit = false;
     @Input() title = '';
     @Input() enablePointer = false;
