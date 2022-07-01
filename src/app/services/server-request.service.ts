@@ -50,7 +50,7 @@ export class ServerRequestService {
         }));
     }
 
-    getRandomGameGiveTheCue(candidates = 5): Observable<GiveTheCueTask> {
+    getGiveTheCueGameTask(candidates = 5): Observable<GiveTheCueTask> {
         const url = `http://localhost:1234/game_random_create/${candidates}`;
         return this.httpService.get<any>(url, {withCredentials: true}).pipe(
             map((task) => {
@@ -71,19 +71,23 @@ export class ServerRequestService {
         }));
     }
 
+    getGuessTheAssociationGameTask(candidates = 5): Observable<GiveTheCueTask> {
+        const url = `http://localhost:1234/get_create_to_solve/${candidates}`;
+        return this.httpService.get<any>(url, {withCredentials: true}).pipe(
+            map((task) => {
+                return this.createNewGuessTheAssociationsTask(task);
+            }), catchError(err => {
+                if (err.status === 401) {
+                    this.authService.userLoggedIn$.next(false)
+                }
+                return of(err)
+            }));
+    }
+
     getRandomGuessTheAssociationTask(candidates = 5): Observable<GuessTheAssociationsTask> {
         const url = `https://gvlab-backend.herokuapp.com/task/example/random_solve/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
             return this.createNewGuessTheAssociationsTask(task);
-        }));
-    }
-
-    getRandomGameGuessTheAssociationTask(candidates = 5): Observable<GuessTheAssociationsTask> {
-        const url = `http://localhost:1234/get_create_to_solve/${candidates}`;
-        return this.httpService.get<any>(url).pipe(map((task) => {
-            return this.createNewGuessTheAssociationsTask(task);
-        }), catchError(err => {
-            return of(err)
         }));
     }
 
@@ -98,6 +102,13 @@ export class ServerRequestService {
         this.httpService.post('https://gvlab-backend.herokuapp.com/create', task.getPredictionFormat(cueIndex)).subscribe((response: any) => {
             task.setAIAnswers(response[0].clip_predictions, cueIndex)
             task.setScore(response[0].human_score, cueIndex)
+        })
+    }
+
+    getAIPredictionGame(task: GiveTheCueTask, cueIndex=0): void {
+        this.httpService.post('http://localhost:1234/create_game', task.getGamePredictionFormat(cueIndex), {withCredentials: true}).subscribe((response: any) => {
+            task.setAIAnswers(response.clip_predictions, cueIndex)
+            task.setScore(response.human_score, cueIndex)
         })
     }
 

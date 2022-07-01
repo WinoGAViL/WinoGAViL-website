@@ -138,4 +138,11 @@ export class GiveTheCueTask implements Jsonable {
         ]
         return {images, type: 'create_mturk', annotations};
     }
+
+    getGamePredictionFormat(cueIndex: number): object {
+        const images = this.candidates[cueIndex].map((candidate) => candidate.name)
+        const userAssociations = this.candidates[cueIndex].filter((candidate) => candidate.userChoice)
+            .map((candidate) => candidate.name);
+        return {images, type: 'create_game', cue: this._userCue.value[cueIndex], num_associations: this.numberOfChosenCandidates(cueIndex), labels: userAssociations};
+    }
 }

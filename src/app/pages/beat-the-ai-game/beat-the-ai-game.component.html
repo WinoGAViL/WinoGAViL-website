@@ -1,7 +1,7 @@
 <app-navbar [isCollapsed]="isCollapsed" (click)="onNavbarClick($event)"></app-navbar>
-<app-login-form *ngIf="!loggedIn" [enterUserName]="enterUserName" [loading]="loading" (registeredSuccessfully$)="onRegister()"></app-login-form>
+<app-login-form *ngIf="!providerLoggedIn || enterUserName" [enterUserName]="enterUserName" [loading]="loading" (registeredSuccessfully$)="onRegister()"></app-login-form>
 <div class="wrapper">
-    <div class="page-header header-filter" *ngIf="loggedIn">
+    <div class="page-header header-filter" *ngIf="providerLoggedIn">
         <app-report-form *ngIf="showReportForm" (close$)="closeReportForm($event)" (submit$)="onReportFormSubmit($event)"></app-report-form>
         <div class="container center-container">
             <div class="content-center brand">
@@ -27,7 +27,7 @@
 
                         <div>
                             <div [style]="{'color': 'black !important'}">Candidates </div>
-                            <select (change)="onCandidatesSelect($event.target.value)" >
+                            <select (change)="onCandidatesSelect($event.target.value)" #candidatesOptionElement>
                                 <option *ngFor="let candidate of candidates" [value]="candidate.value" [style.color]="'black'">
                                     {{candidate.viewValue}}
                                 </option>

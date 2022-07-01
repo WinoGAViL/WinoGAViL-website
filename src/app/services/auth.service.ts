@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import firebase from 'firebase';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import {AngularFireAuth} from '@angular/fire/auth';
-import {BehaviorSubject, of} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import OAuthProvider = firebase.auth.OAuthProvider;
 import {HttpClient} from '@angular/common/http';
 
@@ -44,13 +44,18 @@ export class AuthService {
         }
 
         this.afAuth.onAuthStateChanged((user) => {
+            if(!user) {
+                this.userLoggedIn$.next(false);
+            }
             user.getIdToken().then(idToken => {
-                this.userLoggedIn$.next(!!user);
-                this.userToken$.next(idToken)
                 console.log(this.userToken$.value)
                 document.cookie = `userToken=${idToken};`
                 document.cookie = `userEmail=${user.email};`
-            });
+                this.userLoggedIn$.next(!!user);
+                this.userToken$.next(idToken)
+            }).catch((err) => {
+                console.log(err);
+            })
             console.log(user)
         })
     }

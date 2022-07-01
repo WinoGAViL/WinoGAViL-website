@@ -195,7 +195,7 @@ export class BeatTheAiComponent implements OnInit, OnDestroy {
     }
 
     moveRight() {
-        this.serverRequestService.getRandomGameGiveTheCue().subscribe(test => console.log(test))
+        this.serverRequestService.getGiveTheCueGameTask().subscribe(test => console.log(test))
         this.exampleIndex++;
         this.move()
     }

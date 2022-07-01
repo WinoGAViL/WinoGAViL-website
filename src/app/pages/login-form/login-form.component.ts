@@ -36,31 +36,37 @@ export class LoginFormComponent implements OnInit {
 
     onSubmit(event) {
         if (this.userDetailsForm.valid) {
+            this.loading = true;
+            this.detectChanges();
             this.authService.registerUser(this.userDetailsForm.controls.username.value).pipe(
                 catchError(() => of('Signup is unavailable at the moment'))).subscribe((response) => {
-                    if (response?.status === 'EMAIL_EXISTS') {
-                        this.hint = 'Email already exists'
-                    } else if (response?.status === 'USERNAME_EXISTS') {
-                        this.hint = 'Username already exists'
-                    } else if (response?.status === 'SUCCESS') {
-                        this.registeredSuccessfully$.next()
-                    } else {
-                        this.hint = 'Signup is unavailable at the moment'
-                    }
-                this.changeDetectionRef.markForCheck();
-                this.changeDetectionRef.detectChanges();
+                if (response?.status === 'EMAIL_EXISTS') {
+                    this.hint = 'Email already exists'
+                } else if (response?.status === 'USERNAME_EXISTS') {
+                    this.hint = 'Username already exists'
+                } else if (response?.status === 'SUCCESS') {
+                    this.registeredSuccessfully$.next()
+                } else {
+                    this.hint = 'Signup is unavailable at the moment'
+                }
+                this.loading = false;
+                this.detectChanges();
             })
         } else {
             this.clearHintSubscription.unsubscribe();
             this.hint = 'Username should contain only english letters'
             this.changeDetectionRef.markForCheck();
             this.changeDetectionRef.detectChanges();
-            this.clearHintSubscription = timer(5000).subscribe(() =>  {
+            this.clearHintSubscription = timer(5000).subscribe(() => {
                 this.hint = ''
-                this.changeDetectionRef.markForCheck();
-                this.changeDetectionRef.detectChanges();
+                this.detectChanges();
             })
         }
+    }
+
+    detectChanges() {
+        this.changeDetectionRef.markForCheck();
+        this.changeDetectionRef.detectChanges();
     }
 
     login(provider: 'yahoo' | 'google') {
