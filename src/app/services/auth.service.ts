@@ -78,12 +78,12 @@ export class AuthService {
     }
 
     registerUser(username) {
-        const url = `http://localhost:1234/register_player`;
+        const url = `https://gvlab-backend.herokuapp.com/register_player`;
         return this.httpClient.post<any>(url, {player_name: username}, {withCredentials: true})
     }
 
     isUserExists() {
-        const url = `http://localhost:1234/player_status`;
+        const url = `https://gvlab-backend.herokuapp.com/player_status`;
         return this.httpClient.get<any>(url, {withCredentials: true})
     }
 

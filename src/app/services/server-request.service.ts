@@ -44,14 +44,14 @@ export class ServerRequestService {
     }
 
     getRandomGiveTheCue(candidates = 5): Observable<GiveTheCueTask> {
-        const url = `http://localhost:1234/task/example/random_create/${candidates}`;
+        const url = `https://gvlab-backend.herokuapp.com/task/example/random_create/${candidates}`;
         return this.httpService.get<any>(url).pipe(map((task) => {
             return this.createNewGiveTheCueTask(task);
         }));
     }
 
     getGiveTheCueGameTask(candidates = 5): Observable<GiveTheCueTask> {
-        const url = `http://localhost:1234/game_random_create/${candidates}`;
+        const url = `https://gvlab-backend.herokuapp.com/game_random_create/${candidates}`;
         return this.httpService.get<any>(url, {withCredentials: true}).pipe(
             map((task) => {
                 return this.createNewGiveTheCueTask(task);
@@ -72,7 +72,7 @@ export class ServerRequestService {
     }
 
     getGuessTheAssociationGameTask(candidates = 5): Observable<GiveTheCueTask> {
-        const url = `http://localhost:1234/get_create_to_solve/${candidates}`;
+        const url = `https://gvlab-backend.herokuapp.com/get_create_to_solve/${candidates}`;
         return this.httpService.get<any>(url, {withCredentials: true}).pipe(
             map((task) => {
                 return this.createNewGuessTheAssociationsTask(task);
@@ -100,20 +100,20 @@ export class ServerRequestService {
 
     getAIPrediction(task: GiveTheCueTask, cueIndex=0): void {
         this.httpService.post('https://gvlab-backend.herokuapp.com/create', task.getPredictionFormat(cueIndex)).subscribe((response: any) => {
-            task.setAIAnswers(response[0].clip_predictions, cueIndex)
-            task.setScore(response[0].human_score, cueIndex)
+            task.setAIAnswers(response.clip_predictions, cueIndex)
+            task.setScore(response.human_score, cueIndex)
         })
     }
 
     getAIPredictionGame(task: GiveTheCueTask, cueIndex=0): void {
-        this.httpService.post('http://localhost:1234/create_game', task.getGamePredictionFormat(cueIndex), {withCredentials: true}).subscribe((response: any) => {
+        this.httpService.post('https://gvlab-backend.herokuapp.com/create_game', task.getGamePredictionFormat(cueIndex), {withCredentials: true}).subscribe((response: any) => {
             task.setAIAnswers(response.clip_predictions, cueIndex)
             task.setScore(response.human_score, cueIndex)
         })
     }
 
     solveGame(task: GuessTheAssociationsTask): void {
-        const url = 'http://localhost:1234/solve_game'
+        const url = 'https://gvlab-backend.herokuapp.com/solve_game'
         this.httpService.post(url, task.getSolveFormat(), {withCredentials: true}).subscribe((response: any) => {
             console.log('Solved successfully')
         })
