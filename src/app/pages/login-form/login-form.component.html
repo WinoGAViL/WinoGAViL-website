@@ -26,10 +26,10 @@
     <div class="personal-details-form flex-between" *ngIf="enterUserName && !loading"
          [ngClass]="{'instructions-form': !instructionsOk}">
         <div style="margin-bottom: 35px">
-            This is your first time signing in, please enter a username.
-            The user name will be used in the leaderboard.
+            This is your first time signing in. Please enter a username to complete the registration.
+            The username will be displayed on the game leaderboard.
         </div>
-        <form style="width: 266px" [formGroup]="userDetailsForm" (submit)="onSubmit($event)">
+        <form style="width: 100%" [formGroup]="userDetailsForm" (submit)="onSubmit($event)">
             <mat-form-field appearance="fill" class="fill-container">
                 <input matInput [formControl]="$any(userDetailsForm.controls.username)">
             </mat-form-field>
@@ -37,6 +37,13 @@
                 <button mat-raised-button type="submit" class="btn btn-neutral btn-big">Submit</button>
             </div>
             <div class="hint">{{hint}}</div>
+
+            <div style="margin-top: 35px">
+                <mat-checkbox (change)="detectChanges()" [formControl]="$any(userDetailsForm.controls.consentForm)" class="consent-checkbox"></mat-checkbox>
+                <b>
+                    In registering, you agree that the associations you create will be stored in our database and used for future research. <br><br>
+                    Please be aware that we do not distribute image files, we redirect to the original URL. If you notice a missing / inappropriate image, please report with the report button. </b>
+            </div>
 
         </form>
     </div>

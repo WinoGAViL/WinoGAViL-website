@@ -40,6 +40,7 @@ import {AuthService, firebaseConfig} from '../services/auth.service';
 import {AngularFireModule} from '@angular/fire';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { NoMoreTasksModalComponent } from './no-more-tasks-modal/no-more-tasks-modal.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
@@ -89,7 +90,8 @@ const routes: Routes = [
         MatOptionModule,
         MatSelectModule,
         MatButtonModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatCheckboxModule
     ],
   declarations: [
     MainComponent,

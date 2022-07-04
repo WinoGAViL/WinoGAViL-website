@@ -5,7 +5,7 @@ import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 import {AngularFireAuth} from '@angular/fire/auth';
 import {BehaviorSubject} from 'rxjs';
 import OAuthProvider = firebase.auth.OAuthProvider;
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -79,12 +79,20 @@ export class AuthService {
 
     registerUser(username) {
         const url = `https://gvlab-backend.herokuapp.com/register_player`;
-        return this.httpClient.post<any>(url, {player_name: username}, {withCredentials: true})
+        return this.httpClient.post<any>(url, {player_name: username}, this.getAuthOptions())
     }
 
     isUserExists() {
+        // https://gvlab-backend.herokuapp2.com/player_status
         const url = `https://gvlab-backend.herokuapp.com/player_status`;
-        return this.httpClient.get<any>(url, {withCredentials: true})
+        return this.httpClient.get<any>(url, this.getAuthOptions())
+    }
+
+    getAuthOptions() {
+        const headers = new HttpHeaders()
+            .set('UserDetails', JSON.stringify(this.extractCookies(document.cookie)))
+            .set('Content-Type' , 'application/json')
+        return {withCredentials: true, headers}
     }
 
     private AuthLogin(provider) {
@@ -96,7 +104,7 @@ export class AuthService {
         })
     }
 
-    private extractCookies(cookieStr) {
+    private extractCookies(cookieStr): object {
         const output = {};
         cookieStr.split(/\s*;\s*/).forEach(function (pair) {
             pair = pair.split(/\s*=\s*/);

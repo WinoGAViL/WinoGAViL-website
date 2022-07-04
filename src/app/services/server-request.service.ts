@@ -52,7 +52,7 @@ export class ServerRequestService {
 
     getGiveTheCueGameTask(candidates = 5): Observable<GiveTheCueTask> {
         const url = `https://gvlab-backend.herokuapp.com/game_random_create/${candidates}`;
-        return this.httpService.get<any>(url, {withCredentials: true}).pipe(
+        return this.httpService.get<any>(url, this.authService.getAuthOptions()).pipe(
             map((task) => {
                 return this.createNewGiveTheCueTask(task);
             }), catchError(err => {
@@ -73,7 +73,7 @@ export class ServerRequestService {
 
     getGuessTheAssociationGameTask(candidates = 5): Observable<GiveTheCueTask> {
         const url = `https://gvlab-backend.herokuapp.com/get_create_to_solve/${candidates}`;
-        return this.httpService.get<any>(url, {withCredentials: true}).pipe(
+        return this.httpService.get<any>(url, this.authService.getAuthOptions()).pipe(
             map((task) => {
                 return this.createNewGuessTheAssociationsTask(task);
             }), catchError(err => {
@@ -106,15 +106,15 @@ export class ServerRequestService {
     }
 
     getAIPredictionGame(task: GiveTheCueTask, cueIndex=0): void {
-        this.httpService.post('https://gvlab-backend.herokuapp.com/create_game', task.getGamePredictionFormat(cueIndex), {withCredentials: true}).subscribe((response: any) => {
+        this.httpService.post('https://gvlab-backend.herokuapp.com/create_game', task.getGamePredictionFormat(cueIndex), this.authService.getAuthOptions()).subscribe((response: any) => {
             task.setAIAnswers(response.clip_predictions, cueIndex)
             task.setScore(response.human_score, cueIndex)
         })
     }
-
+    // gvl2ab-backend.herokuapp.com
     solveGame(task: GuessTheAssociationsTask): void {
         const url = 'https://gvlab-backend.herokuapp.com/solve_game'
-        this.httpService.post(url, task.getSolveFormat(), {withCredentials: true}).subscribe((response: any) => {
+        this.httpService.post(url, task.getSolveFormat(), this.authService.getAuthOptions()).subscribe((response: any) => {
             console.log('Solved successfully')
         })
     }
