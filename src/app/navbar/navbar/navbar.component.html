@@ -12,7 +12,7 @@
                     target="WinoGAViL"
                     (click)="click.emit('menu')"
             >
-                <span> WinoGAViL</span> <a class="title-description"><b>•</b> Gamified Association Benchmark to Challenge Vision-and-Language Models</a>
+                <span> WinoGAViL</span>
             </a>
             <button
                     aria-controls="navigation-index"
@@ -51,7 +51,7 @@
             <!--                </div>-->
             <!--            </div>-->
             <ul class="navbar-nav">
-                <li class="nav-item p-0">
+                <li class="nav-item  p-0">
                     <a
                             class="nav-link"
                             href="https://github.com/WinoGAViL/WinoGAViL-experiments"
@@ -60,6 +60,16 @@
                     >
                         <i class="fab fa-github"> </i>
                         <p class="d-lg-none d-xl-none">Github</p>
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a
+                            class="nav-link"
+                            href="javascript:void(0)"
+                            (click)="click.emit('leaderboard')"
+                            [routerLink]="['/leaderboard']"
+                    >
+                        Leaderboard
                     </a>
                 </li>
                 <li class="nav-item">

@@ -11,12 +11,14 @@ import {MturkSolveComponent} from './pages/mturk-solve/mturk-solve.component';
 import {MturkCreateQualificationComponent} from './pages/mturk-create-qualification/mturk-create-qualification.component';
 import {MturkSolveQualificationComponent} from './pages/mturk-solve-qualification/mturk-solve-qualification.component';
 import {BeatTheAiGameComponent} from './pages/beat-the-ai-game/beat-the-ai-game.component';
+import {LeaderboardComponent} from './pages/leaderboard/leaderboard.component';
 
 export const solveCratePath = 'mturk/solve/create/:id';
 export const beatTheAI = 'challenge-the-ai';
 export const beatTheAICreate = 'challenge-the-ai/create';
 export const beatTheAIGame = 'game';
 export const beatTheAISolve = 'explore';
+export const leaderboard = 'leaderboard';
 
 const routes: Routes = [
   { path: '*', component: MainComponent},
@@ -26,6 +28,7 @@ const routes: Routes = [
   { path: beatTheAICreate, component: BeatTheAiComponent },
   { path: beatTheAISolve, component: BeatTheAiComponent },
   { path: beatTheAIGame, component: BeatTheAiGameComponent },
+  { path: leaderboard, component: LeaderboardComponent },
   { path: 'mturk/create/:id', component: MturkCreateComponent },
   { path: 'mturk/solve/:id', component: MturkSolveComponent },
   { path: solveCratePath, component: MturkSolveComponent },

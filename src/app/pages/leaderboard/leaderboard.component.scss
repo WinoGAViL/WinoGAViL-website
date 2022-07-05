@@ -1,0 +1,116 @@
+.page-header .content-center {
+  color: black !important;
+}
+
+.content-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7rem;
+}
+
+.padding-bottom {
+  padding-bottom: 5rem;
+}
+
+.main-label {
+  font-weight: 600;
+  text-transform: none !important;
+  font-size: 4rem;
+  color: #fd969e !important;
+}
+
+.leaderboard-container {
+  width: 100%;
+  min-height: 400px;
+  box-shadow: 0 0.5rem 0.5rem rgb(0 0 0 / 5%);
+}
+
+ul li, ol li {
+  color: black;
+}
+
+body {
+  font-family: 'lato', sans-serif;
+}
+.container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 20px 0;
+  text-align: center;
+  small {
+    font-size: 0.5em;
+  }
+}
+
+.responsive-table {
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #fbdddf;
+    box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+  }
+  .col-1-leaderboard {
+    flex-basis: 5%;
+  }
+  .col-2-leaderboard {
+    flex-basis: 80%;
+    text-align: left;
+  }
+  .col-3-leaderboard {
+    flex-basis: 5%;
+  }
+  .col-4-leaderboard {
+    flex-basis: 5%;
+  }
+  .col-5-leaderboard {
+    flex-basis: 5%;
+  }
+
+  @media all and (max-width: 767px) {
+    .table-header {
+      display: none;
+    }
+    .table-row{
+
+    }
+    li {
+      display: block;
+    }
+    .col-leaderboard {
+
+      flex-basis: 100%;
+
+    }
+    .col-leaderboard {
+      display: flex;
+      padding: 10px 0;
+      &:before {
+        color: #6C7A89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+      }
+    }
+  }
+}

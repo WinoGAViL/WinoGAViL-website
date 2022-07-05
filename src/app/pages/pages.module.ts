@@ -31,7 +31,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { PersonalDetailsFormComponent } from './personal-details-form/personal-details-form.component';
 import {MatButtonModule} from '@angular/material/button';
-import {beatTheAI, beatTheAICreate, beatTheAIGame, beatTheAISolve, solveCratePath} from '../app-routing.module';
+import {beatTheAI, beatTheAICreate, beatTheAIGame, beatTheAISolve, leaderboard, solveCratePath} from '../app-routing.module';
 import {NavbarComponent} from '../navbar/navbar/navbar.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReportFormComponent } from './report-form/report-form.component';
@@ -41,12 +41,14 @@ import {AngularFireModule} from '@angular/fire';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { NoMoreTasksModalComponent } from './no-more-tasks-modal/no-more-tasks-modal.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
   { path: beatTheAISolve, component: BeatTheAiComponent },
   // { path: beatTheAIGame, component: BeatTheAiGameComponent, canActivate: [AuthGuard] },
   { path: beatTheAIGame, component: BeatTheAiGameComponent},
+  { path: leaderboard, component: LeaderboardComponent },
   { path: 'download', component: DownloadComponent },
   { path: 'mturk/create/:id', component: MturkCreateComponent },
   { path: 'mturk/solve/:id', component: MturkSolveComponent },
@@ -107,7 +109,8 @@ const routes: Routes = [
     ReportFormComponent,
     BeatTheAiGameComponent,
     LoginFormComponent,
-    NoMoreTasksModalComponent
+    NoMoreTasksModalComponent,
+    LeaderboardComponent
   ],
   exports: [
     MainComponent,

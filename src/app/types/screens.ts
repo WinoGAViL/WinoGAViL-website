@@ -1,1 +1,1 @@
-export type screens = 'beat-the-ai' | 'explore' | 'download' | 'menu';
+export type screens = 'beat-the-ai' | 'explore' | 'download' | 'menu' | 'leaderboard';
