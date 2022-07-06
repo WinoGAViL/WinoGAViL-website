@@ -55,7 +55,7 @@ export class LoginFormComponent implements OnInit {
             })
         } else {
             this.clearHintSubscription.unsubscribe();
-            this.hint = this.userDetailsForm?.controls?.username?.valid ? 'Please accept the terms of use' : 'Username should contain only english letters, and should have no more than 20 characters.'
+            this.hint = this.userDetailsForm?.controls?.username?.valid ? 'Please accept the terms of use' : 'The username should contain only English letters, and should not exceed 20 characters.'
             this.changeDetectionRef.markForCheck();
             this.changeDetectionRef.detectChanges();
             this.clearHintSubscription = timer(5000).subscribe(() => {
