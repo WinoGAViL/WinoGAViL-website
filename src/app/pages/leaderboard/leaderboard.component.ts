@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {UserStats} from '../../types/user-stats';
+import {LeaderboardService} from '../../services/leaderboard.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,8 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
   isCollapsed = true;
-
-  constructor() {
+  leaderboard$: Observable<UserStats[]>
+  constructor(private leaderboardService: LeaderboardService) {
+    this.leaderboard$ = this.leaderboardService.leaderboard;
   }
 
   ngOnInit(): void {

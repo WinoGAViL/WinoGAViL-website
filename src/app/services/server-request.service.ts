@@ -6,6 +6,9 @@ import {GiveTheCueTask} from '../types/give-the-cue-task';
 import {GuessTheAssociationsTask} from '../types/guess-the-associations-task';
 import {catchError, map} from 'rxjs/operators';
 import {AuthService} from './auth.service';
+import {UserStats} from '../types/user-stats';
+import firebase from 'firebase';
+import User = firebase.User;
 
 // mock
 
@@ -26,8 +29,8 @@ function getImagePath(imgName: string) {
     // return awsURL+imgName+'.jpg';
     return imgName
 }
-
-
+// https://gvlabt-backend.herokuapp.com
+// http://127t.0.0.1:1235
 @Injectable()
 export class ServerRequestService {
 
@@ -133,5 +136,12 @@ export class ServerRequestService {
     createNewGiveTheCueTask(task): GiveTheCueTask {
         const id = task.ID === undefined ? task.id : task.ID
         return new GiveTheCueTask([task.candidates.map((img, index) => new Candidate(getImagePath(img), task.candidates_original[index])), task.candidates.map((img, index) => new Candidate(getImagePath(img), task.candidates_original[index]))], ['', ''], id);
+    }
+
+    getLeaderboard(): Observable<UserStats[]> {
+        const url = `https://gvlab-backend.herokuapp.com/leaderboard`
+        return this.httpService.get<any>(url).pipe(map((leaderboard: any[]) => {
+            return leaderboard.map(((serverUserDetails, index) => new UserStats(index+1, serverUserDetails?.player_email, serverUserDetails['fool-the-ai'], serverUserDetails['solvable-by-humans'], serverUserDetails['solving-existing-associations'])));
+        }));
     }
 }

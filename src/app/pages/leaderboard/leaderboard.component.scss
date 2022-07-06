@@ -52,6 +52,7 @@ h2 {
 }
 
 .responsive-table {
+  padding: 0;
   li {
     border-radius: 3px;
     padding: 25px 30px;
@@ -59,34 +60,44 @@ h2 {
     justify-content: space-between;
     margin-bottom: 25px;
   }
-  .table-header {
-    background-color: #95A5A6;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-  }
-  .table-row {
+  //.table-header {
+  //  background-color: #95A5A6;
+  //  font-size: 14px;
+  //  text-transform: uppercase;
+  //  letter-spacing: 0.03em;
+  //}
+  .table-row, .table-header {
+    width: 100%;
     background-color: #fbdddf;
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
   }
   .col-1-leaderboard {
-    flex-basis: 5%;
+    width: 5%;
   }
   .col-2-leaderboard {
-    flex-basis: 80%;
+    width: 50%;
     text-align: left;
+    margin-left: 16px;
   }
-  .col-3-leaderboard {
-    flex-basis: 5%;
+  .col-3-leaderboard, .col-4-leaderboard, .col-5-leaderboard {
+    width: 15%;
   }
-  .col-4-leaderboard {
-    flex-basis: 5%;
-  }
-  .col-5-leaderboard {
-    flex-basis: 5%;
+
+  .table-header {
+    .col-3-leaderboard, .col-4-leaderboard, .col-5-leaderboard {
+      font-size: 12px;
+    }
   }
 
   @media all and (max-width: 767px) {
+    .col-2-leaderboard {
+      margin-left: 0px;
+    }
+
+    .col-1-leaderboard, .col-2-leaderboard, .col-3-leaderboard, .col-4-leaderboard, .col-5-leaderboard {
+      width: 134px;
+    }
+
     .table-header {
       display: none;
     }
@@ -104,13 +115,14 @@ h2 {
     .col-leaderboard {
       display: flex;
       padding: 10px 0;
+      justify-content: space-between;
       &:before {
         color: #6C7A89;
-        padding-right: 10px;
+        width: 20px;
         content: attr(data-label);
-        flex-basis: 50%;
         text-align: right;
       }
     }
   }
 }
+

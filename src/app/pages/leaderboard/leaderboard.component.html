@@ -16,12 +16,13 @@
                                 <div class="col-leaderboard col-4-leaderboard">Solvable by Humans</div>
                                 <div class="col-leaderboard col-5-leaderboard">Number of Associations Solved</div>
                             </li>
-                            <li class="table-row">
-                                <div class="col-leaderboard col-1-leaderboard" data-label="Rank">2</div>
-                                <div class="col-leaderboard col-2-leaderboard" data-label="User">John Doe</div>
-                                <div class="col-leaderboard col-3-leaderboard" data-label="Fool the AI">90</div>
-                                <div class="col-leaderboard col-4-leaderboard" data-label="Solvable by Humans">90</div>
-                                <div class="col-leaderboard col-5-leaderboard" data-label="Number of Associations Solved">90</div>
+
+                            <li class="table-row" *ngFor="let user of (leaderboard$ | async)">
+                                <div class="col-leaderboard col-1-leaderboard" data-label="Rank">{{user.rank}}</div>
+                                <div class="col-leaderboard col-2-leaderboard" data-label="User">{{user.username}}</div>
+                                <div class="col-leaderboard col-3-leaderboard" data-label="Fool the AI">{{user.foolTheAI}}</div>
+                                <div class="col-leaderboard col-4-leaderboard" data-label="Solvable by Humans">{{user.solvableByHumans}}</div>
+                                <div class="col-leaderboard col-5-leaderboard" data-label="Number of Associations Solved">{{user.numberOfAssociationsSolved}}</div>
                             </li>
 
                         </ul>

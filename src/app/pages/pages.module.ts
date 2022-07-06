@@ -42,6 +42,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { NoMoreTasksModalComponent } from './no-more-tasks-modal/no-more-tasks-modal.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import {LeaderboardService} from '../services/leaderboard.service';
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
@@ -120,10 +121,13 @@ const routes: Routes = [
   ],
   providers: [
       AuthService,
+      LeaderboardService,
       {provide: APP_BASE_HREF, useValue: document.getElementsByTagName('base')[0].href}]
 })
 export class PagesModule {
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+                private leaderboardService: LeaderboardService) {
         this.authService.init();
+        this.leaderboardService.init();
     }
 }
