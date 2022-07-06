@@ -27,7 +27,7 @@ export class LoginFormComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private authService: AuthService, private changeDetectionRef: ChangeDetectorRef) {
         this.userDetailsForm = this.fb.group({
-            username: new FormControl('', [Validators.required, Validators.minLength(1), Validators.pattern(/^[a-zA-Z0-9]*$/)]),
+            username: new FormControl('', [Validators.required, Validators.minLength(1), Validators.maxLength(20), Validators.pattern(/^[a-zA-Z0-9]*$/)]),
             consentForm: new FormControl('', [Validators.required])
         })
     }
@@ -55,7 +55,7 @@ export class LoginFormComponent implements OnInit {
             })
         } else {
             this.clearHintSubscription.unsubscribe();
-            this.hint = this.userDetailsForm?.controls?.username?.valid ? 'Please accept the terms of use' : 'Username should contain only english letters'
+            this.hint = this.userDetailsForm?.controls?.username?.valid ? 'Please accept the terms of use' : 'Username should contain only english letters, and should have no more than 20 characters.'
             this.changeDetectionRef.markForCheck();
             this.changeDetectionRef.detectChanges();
             this.clearHintSubscription = timer(5000).subscribe(() => {

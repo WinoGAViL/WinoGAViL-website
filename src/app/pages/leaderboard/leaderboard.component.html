@@ -4,7 +4,7 @@
         <div class="container center-container">
             <div class="content-center brand">
                 <h4 class="main-label padding-bottom">
-                    Leaderboard 🏆
+                    Players Leaderboard 🏆
                 </h4>
                 <div class="leaderboard-container">
                     <div class="container">
@@ -14,7 +14,7 @@
                                 <div class="col-leaderboard col-2-leaderboard">User</div>
                                 <div class="col-leaderboard col-3-leaderboard">Fool The AI</div>
                                 <div class="col-leaderboard col-4-leaderboard">Solvable by Humans</div>
-                                <div class="col-leaderboard col-5-leaderboard">Number of Associations Solved</div>
+                                <div class="col-leaderboard col-5-leaderboard">Solving Associations</div>
                             </li>
 
                             <li class="table-row" *ngFor="let user of (leaderboard$ | async)">
@@ -22,9 +22,34 @@
                                 <div class="col-leaderboard col-2-leaderboard" data-label="User">{{user.username}}</div>
                                 <div class="col-leaderboard col-3-leaderboard" data-label="Fool the AI">{{user.foolTheAI}}</div>
                                 <div class="col-leaderboard col-4-leaderboard" data-label="Solvable by Humans">{{user.solvableByHumans}}</div>
-                                <div class="col-leaderboard col-5-leaderboard" data-label="Number of Associations Solved">{{user.numberOfAssociationsSolved}}</div>
+                                <div class="col-leaderboard col-5-leaderboard" data-label="Solving Associations">{{user.numberOfAssociationsSolved}}</div>
                             </li>
 
+                        </ul>
+                    </div>
+                </div>
+                <div class="small-note">* Scores are Jaccard Index (%)</div>
+            </div>
+            <div class="content-center brand ai-leaderboard">
+                <h4 class="main-label padding-bottom">
+                    AI Models Leaderboard 🏆
+                </h4>
+                <div class="leaderboard-container">
+                    <div class="container">
+                        <ul class="responsive-table">
+                            <li class="table-header">
+                                <div class="col-leaderboard col-2-AI-leaderboard">Model</div>
+                                <div class="col-leaderboard col-3-leaderboard">10 & 12</div>
+                                <div class="col-leaderboard col-4-leaderboard">5 & 6</div>
+                                <div class="col-leaderboard col-5-leaderboard">5 & 6 SWOW</div>
+                            </li>
+
+                            <li class="table-row" *ngFor="let model of models">
+                                <div class="col-leaderboard col-2-AI-leaderboard" data-label="Model">{{model.name}}</div>
+                                <div class="col-leaderboard col-3-leaderboard" data-label="10 & 12">{{model["10&12"]}}</div>
+                                <div class="col-leaderboard col-4-leaderboard" data-label="5 & 6">{{model['5&6']}}</div>
+                                <div class="col-leaderboard col-5-leaderboard" data-label="5 & 6 SWOW">{{model['5&6SWOW']}}</div>
+                            </li>
                         </ul>
                     </div>
                 </div>
