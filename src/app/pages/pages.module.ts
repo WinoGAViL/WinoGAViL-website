@@ -43,6 +43,7 @@ import { NoMoreTasksModalComponent } from './no-more-tasks-modal/no-more-tasks-m
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import {LeaderboardService} from '../services/leaderboard.service';
+import {MatTooltipModule} from '@angular/material/tooltip';
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
@@ -94,7 +95,8 @@ const routes: Routes = [
         MatSelectModule,
         MatButtonModule,
         MatFormFieldModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatTooltipModule
     ],
   declarations: [
     MainComponent,

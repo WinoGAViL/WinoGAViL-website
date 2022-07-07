@@ -60,7 +60,8 @@ export class LeaderboardComponent implements OnInit {
           '5&6': '53',
           '5&6SWOW': '68'
       }
-  ]
+  ].sort((a,b) => Number(b['10&12']) - Number(a['10&12']))
+
   constructor(private leaderboardService: LeaderboardService) {
     this.leaderboard$ = this.leaderboardService.leaderboard;
   }

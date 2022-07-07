@@ -12,9 +12,12 @@
                             <li class="table-header">
                                 <div class="col-leaderboard col-1-leaderboard">Rank</div>
                                 <div class="col-leaderboard col-2-leaderboard">User</div>
-                                <div class="col-leaderboard col-3-leaderboard">Fool The AI</div>
-                                <div class="col-leaderboard col-4-leaderboard">Solvable by Humans</div>
-                                <div class="col-leaderboard col-5-leaderboard">Solving Associations</div>
+                                <div class="col-leaderboard col-3-leaderboard" matTooltip="The player score for creating associations that solves the UI. It is calculated by
+                                 (100 - ‘model score’), where the model score is the Jaccard index of the model predictions and the labeled associations." style="cursor: help">Fool The AI</div>
+                                <div class="col-leaderboard col-4-leaderboard" matTooltip="The average score of three solvers.
+                                Each solver score is calculated by a Jaccard index of the solver selections and the labeled associations."  style="cursor: help">Solvable by Humans</div>
+                                <div class="col-leaderboard col-5-leaderboard" matTooltip="The player score for solving existing associations created by users.
+                                Each player score is calculated by a Jaccard index of the player selections and the labeled associations."  style="cursor: help">Solving Associations</div>
                             </li>
 
                             <li class="table-row" *ngFor="let user of (leaderboard$ | async)">
@@ -41,14 +44,12 @@
                                 <div class="col-leaderboard col-2-AI-leaderboard">Model</div>
                                 <div class="col-leaderboard col-3-leaderboard">10 & 12</div>
                                 <div class="col-leaderboard col-4-leaderboard">5 & 6</div>
-                                <div class="col-leaderboard col-5-leaderboard">5 & 6 SWOW</div>
                             </li>
 
                             <li class="table-row" *ngFor="let model of models">
                                 <div class="col-leaderboard col-2-AI-leaderboard" data-label="Model">{{model.name}}</div>
                                 <div class="col-leaderboard col-3-leaderboard" data-label="10 & 12">{{model["10&12"]}}</div>
                                 <div class="col-leaderboard col-4-leaderboard" data-label="5 & 6">{{model['5&6']}}</div>
-                                <div class="col-leaderboard col-5-leaderboard" data-label="5 & 6 SWOW">{{model['5&6SWOW']}}</div>
                             </li>
                         </ul>
                     </div>
