@@ -14,7 +14,6 @@
                     <app-no-more-tasks-modal *ngIf="noMoreTasksToSolve"></app-no-more-tasks-modal>
                     <app-task-board class="analogies-board" [guessTheAssociationsTask]="guessTheAssociationsTask"
                                     [enablePointer]="true" [testMode]="gameMode" [submit]="_submit"
-                                    [disableSolutionIcons]="true"
                                     [info]="'Several images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'"
                                     *ngIf="isGuessAssociationsTask === true && this.guessTheAssociationsTask"></app-task-board>
                     <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="true"
