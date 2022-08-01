@@ -1,0 +1,89 @@
+::ng-deep .card {
+  background-color: white;
+  box-shadow: none;
+}
+
+
+.main-label {
+  font-weight: 600;
+  text-transform: none !important;
+  font-size: 4rem;
+  color: #fd969e !important;
+}
+
+#dashboard {
+  width: 90%;
+}
+
+.analogy-container {
+  width: 125%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+
+.board {
+  display: flex;
+}
+
+.no-underline-mat-field ::ng-deep  .mat-form-field-underline  {
+  visibility: hidden !important;
+}
+
+
+.content-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.back-arrow-image, .content-center {
+  padding-top: 8rem;
+}
+
+.back-arrow-image {
+  cursor: pointer;
+  position: absolute;
+  width: 4rem;
+  top: 0;
+  right: 0;
+}
+
+.top-board {
+  width: 600px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+::ng-deep .mat-form-field-flex {
+  padding: 0 !important;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  text-align: center;
+}
+.fas {
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+input, .bold-text {
+  font-size: 2rem;
+  color: black;
+  font-weight: bold;
+}
+
+//Material
+::ng-deep .mat-form-field-flex {
+  background-color: transparent !important;
+}
+

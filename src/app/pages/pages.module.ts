@@ -44,6 +44,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import {LeaderboardService} from '../services/leaderboard.service';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {ChartModule} from 'primeng/chart';
+import {AccordionModule} from 'primeng/accordion';
+
 const routes: Routes = [
   { path: beatTheAI, component: BeatTheAiComponent },
   { path: beatTheAICreate, component: BeatTheAiComponent },
@@ -75,6 +79,8 @@ const routes: Routes = [
         BrowserModule,
         FormsModule,
         MatDialogModule,
+        ChartModule,
+        AccordionModule,
         MatInputModule,
         RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
         BsDropdownModule.forRoot(),
@@ -113,7 +119,8 @@ const routes: Routes = [
     BeatTheAiGameComponent,
     LoginFormComponent,
     NoMoreTasksModalComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    DashboardComponent
   ],
   exports: [
     MainComponent,

@@ -54,6 +54,29 @@ h1, h3 {
   }
 }
 
+@media (max-width: 900px) {
+  .report-container {
+    padding-top: 10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .bottom-container {
+    flex-direction: column;
+    height: 200px;
+  }
+
+  .top-container {
+    padding-right: 0 !important;
+  }
+}
+
 
 @media (max-width: 500px) {
   .results-nav {
@@ -89,19 +112,31 @@ h1, h3 {
 
 @media (max-width: 500px) {
   .test-me-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
+    direction: ltr;
   }
 
 }
 
 .test-me-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 600px;
+  width: 680px;
   padding-bottom: 20px;
 }
 
+.bottom-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 450px;
+}
+
+.top-container {
+  width: 79px;
+  padding-right: 29px;
+}
 
 .example-label {
   width: 125%;
@@ -234,11 +269,8 @@ h1, h3 {
 }
 
 .report-container {
-  left: 0;
-  position: absolute;
+  margin-top: 2px;
   color: black;
-  margin-top: 4px;
-  margin-left: 55px;
 }
 
 .fa-triangle-exclamation {

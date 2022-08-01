@@ -2,10 +2,12 @@ import {Injectable} from '@angular/core';
 // Import the functions you need from the SDKs you need
 import firebase from 'firebase';
 import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
-import {AngularFireAuth} from '@angular/fire/auth';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, interval, Observable, Subscription, timer} from 'rxjs';
 import OAuthProvider = firebase.auth.OAuthProvider;
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {UserDashboard} from '../types/user-dashboard';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,12 +25,15 @@ export const firebaseConfig = {
 };
 
 // Initialize Firebase
+const DASHBOARD_POLLING_INTERVAL = 60000;
 
 @Injectable()
 export class AuthService {
     userLoggedIn$ = new BehaviorSubject<boolean>(null)
     userToken$ = new BehaviorSubject<string>('');
     shouldLogin = false;
+    userDashboard$ = new BehaviorSubject<UserDashboard>(null);
+    userDashboardSubscription = new Subscription();
 
     constructor(private afAuth: AngularFireAuth,
                 private httpClient: HttpClient) {
@@ -41,22 +46,31 @@ export class AuthService {
         const cookies = this.extractCookies(document.cookie);
         if (!(cookies.hasOwnProperty('userToken') && cookies.hasOwnProperty('userEmail'))) {
             this.shouldLogin = true;
+        } else {
+            this.getUserDashboard().subscribe((userDashboard: UserDashboard) => {
+                this.userDashboard$.next(userDashboard);
+            });
         }
 
         this.afAuth.onAuthStateChanged((user) => {
             if(!user) {
                 this.userLoggedIn$.next(false);
             }
-            user.getIdToken().then(idToken => {
+            user && user.getIdToken().then(idToken => {
                 console.log(this.userToken$.value)
                 document.cookie = `userToken=${idToken};`
                 document.cookie = `userEmail=${user.email};`
+                this.userDashboard$.next(null);
+                this.userDashboardSubscription.unsubscribe();
+                this.userDashboardSubscription = timer(0, DASHBOARD_POLLING_INTERVAL).subscribe(() => {
+                    this.getUserDashboard().subscribe((userDashboard: UserDashboard) => {
+                        this.userDashboard$.next(userDashboard);
+                    });
+                });
                 this.userLoggedIn$.next(!!user);
                 this.userToken$.next(idToken)
             }).catch((err) => {
-                console.log(err);
             })
-            console.log(user)
         })
     }
 
@@ -67,6 +81,10 @@ export class AuthService {
             case 'yahoo':
                 return this.yahooAuth();
         }
+    }
+
+    logout() {
+        this.afAuth.signOut().then(r => console.log(r))
     }
 
     yahooAuth() {
@@ -93,6 +111,12 @@ export class AuthService {
             .set('UserDetails', JSON.stringify(this.extractCookies(document.cookie)))
             .set('Content-Type' , 'application/json')
         return {withCredentials: true, headers}
+    }
+
+
+    private getUserDashboard(): Observable<UserDashboard> {
+        const url = `https://gvlab-backend.herokuapp.com/dashboard`
+        return this.httpClient.get<UserDashboard>(url, this.getAuthOptions())
     }
 
     private AuthLogin(provider) {

@@ -39,6 +39,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
   showReportForm = false;
   providerLoggedIn = false;
   enterUserName = false;
+  dashboard = false;
   loading = false;
   noMoreTasksToSolve = false;
   candidates = [
@@ -100,6 +101,7 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
 
   closeReportForm($event) {
     this.showReportForm = false;
+    this.detectChanges();
   }
 
   onReportFormSubmit(details) {
@@ -247,6 +249,11 @@ export class BeatTheAiGameComponent implements OnInit, OnDestroy {
     this.enterUserName = false;
     this.detectChanges();
     location.reload();
+  }
+
+  showDashboard(state) {
+    this.dashboard = state;
+    this.detectChanges();
   }
 
   detectChanges() {

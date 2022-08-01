@@ -1,30 +1,38 @@
 <canvas id="confetti" [ngStyle]="{position: 'absolute', 'pointer-events': 'none'}"></canvas>
 <h3 style="text-transform: none;">{{title}}</h3>
 <div class="analogy-container">
-    <div class="right-board-container">
-        <div class="board top-board" [style.width]="isGuessAssociationsTask ? '600px' : 'auto'">
-            <div class="main-description" *ngIf="showInfo" [innerHTML]="info">
+    <div class="cue-line-container">
+        <div class="fas-container">
+            <img class="dashboard-icon" style="cursor: pointer" src="assets/img/dashboard.png" (click)="showDashboard()">
+        </div>
+        <div class="right-board-container">
+            <div class="board top-board" [style.width]="isGuessAssociationsTask ? '600px' : 'auto'">
+                <div class="main-description" *ngIf="showInfo" [innerHTML]="info">
+                </div>
+                <div class="cue-board">
+                    <div class="label board-title"> Cue</div>
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="fill"
+                                        [ngClass]="{'no-underline-mat-field': isGuessAssociationsTask}">
+                            <input matInput [formControl]="cueFormControl" [readonly]="true" *ngIf="isGuessAssociationsTask"
+                                   autocomplete="off"/>
+                            <input matInput [formControl]="cueFormControl" [readonly]="_submit"
+                                   *ngIf="!isGuessAssociationsTask" autocomplete="off"/>
+                            <mat-error *ngIf="!cueFormControl.valid && cueFormControl.value != ''">
+                                Cue should be one word in english
+                            </mat-error>
+                        </mat-form-field>
+                    </form>
+                </div>
+                <div class="associations-board" *ngIf="isGuessAssociationsTask">
+                    <div class="label board-title"> Associations</div>
+                    <div class="bold-text"> {{this._guessAssociationTask.associations}} </div>
+                </div>
             </div>
+        </div>
+        <div class="fas-container">
             <i class="fas fa-info-circle" aria-hidden="true" *ngIf="info.length" (click)="toggleInfo()"></i>
-            <div class="cue-board">
-                <div class="label board-title"> Cue</div>
-                <form class="example-form">
-                    <mat-form-field class="example-full-width" appearance="fill"
-                                    [ngClass]="{'no-underline-mat-field': isGuessAssociationsTask}">
-                        <input matInput [formControl]="cueFormControl" [readonly]="true" *ngIf="isGuessAssociationsTask"
-                               autocomplete="off"/>
-                        <input matInput [formControl]="cueFormControl" [readonly]="_submit"
-                               *ngIf="!isGuessAssociationsTask" autocomplete="off"/>
-                        <mat-error *ngIf="!cueFormControl.valid && cueFormControl.value != ''">
-                            Cue should be one word in english
-                        </mat-error>
-                    </mat-form-field>
-                </form>
-            </div>
-            <div class="associations-board" *ngIf="isGuessAssociationsTask">
-                <div class="label board-title"> Associations</div>
-                <div class="bold-text"> {{this._guessAssociationTask.associations}} </div>
-            </div>
+            <i class="fas fa-sign-out-alt" aria-hidden="true" *ngIf="userDashboard" (click)="logout()"></i>
         </div>
     </div>
     <div class="AI-response-label-container"

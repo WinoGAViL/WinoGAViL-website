@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap, take} from 'rxjs/operators';
 import {GuessTheAssociationsTask} from '../types/guess-the-associations-task';
 import {GiveTheCueTask} from '../types/give-the-cue-task';
+import {UserDashboard} from '../types/user-dashboard';
 
 @Component({
     selector: 'app-task-board',
@@ -33,8 +34,11 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
     @Input() enablePointer = false;
     @Input() AIRequest = true;
     @Input() info: string = '';
+    @Input() userDashboard: UserDashboard = null;
     _cueIndex = 0
     @Output() selected$: EventEmitter<Candidate> = new EventEmitter<Candidate>();
+    @Output() logout$: EventEmitter<void> = new EventEmitter<void>();
+    @Output() showDashboard$: EventEmitter<void> = new EventEmitter<void>();
     cueFormControl = new FormControl('');
     cueValueChangesSubscription = new Subscription();
     cueValueChangedSubscription = new Subscription();
@@ -72,6 +76,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
                 this.cueFormControl.setValue(userCues[this._cueIndex])
             })
         }
+        this.detectChanges();
     }
 
     @Input()
@@ -109,8 +114,7 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
                     this.renderConfetti()
                 }
             }
-            this.changeDetectionRef.markForCheck()
-            this.changeDetectionRef.detectChanges()
+            this.detectChanges();
         }
     }
 
@@ -138,6 +142,19 @@ export class TaskBoardComponent implements OnInit, OnDestroy {
 
     toggleInfo(): void {
         this.showInfo = !this.showInfo;
+        this.detectChanges();
     }
 
+    detectChanges(): void {
+        this.changeDetectionRef.markForCheck();
+        this.changeDetectionRef.detectChanges();
+    }
+
+    logout(): void {
+        this.logout$.emit();
+    }
+
+    showDashboard(): void {
+        this.showDashboard$.emit();
+    }
 }

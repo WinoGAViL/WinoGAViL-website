@@ -1,7 +1,7 @@
 <app-navbar [isCollapsed]="isCollapsed" (click)="onNavbarClick($event)"></app-navbar>
 <app-login-form *ngIf="!providerLoggedIn || enterUserName" [enterUserName]="enterUserName" [loading]="loading" (registeredSuccessfully$)="onRegister()"></app-login-form>
 <div class="wrapper">
-    <div class="page-header header-filter" *ngIf="providerLoggedIn">
+    <div *ngIf="providerLoggedIn && !dashboard" class="page-header header-filter">
         <app-report-form *ngIf="showReportForm" (close$)="closeReportForm($event)" (submit$)="onReportFormSubmit($event)"></app-report-form>
         <div class="container center-container">
             <div class="content-center brand">
@@ -12,35 +12,41 @@
                 </div>
                 <div class="task-container" *ngIf="gameMode">
                     <app-no-more-tasks-modal *ngIf="noMoreTasksToSolve"></app-no-more-tasks-modal>
-                    <app-task-board class="analogies-board" [guessTheAssociationsTask]="guessTheAssociationsTask"
-                                    [enablePointer]="true" [testMode]="gameMode" [submit]="_submit"
+                    <app-task-board class="analogies-board" [guessTheAssociationsTask]="guessTheAssociationsTask" (logout$)="authService.logout()"
+                                    (showDashboard$)="showDashboard(true)" [enablePointer]="true" [testMode]="gameMode" [submit]="_submit" [userDashboard]="authService.userDashboard$ | async"
                                     [info]="'Several images are presented below. \n A cue word and number of associated images are given. \n                     Choose the images that best associates with the cue word.'"
                                     *ngIf="isGuessAssociationsTask === true && this.guessTheAssociationsTask"></app-task-board>
-                    <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="true"
-                                    [testMode]="gameMode" [submit]="_submit"
+                    <app-task-board class="analogies-board" [giveCueTask]="giveTheCueTask" [enablePointer]="true" [userDashboard]="authService.userDashboard$ | async"
+                                    [testMode]="gameMode" [submit]="_submit" (logout$)="authService.logout()" (showDashboard$)="showDashboard(true)"
                                     [info]="giveTheCueInfo"
                                     *ngIf="isGuessAssociationsTask === false && this.giveTheCueTask"></app-task-board>
                     <div class="test-me-container">
-                        <div class="report-container">
-                            <div><i class="fas fa-solid fa-triangle-exclamation" [style.color]="'red'" (click)="showReportForm=true"> </i></div>
-                            Report
+                        <div class="top-container">
+                            <div class="report-container">
+                                <div><i class="fas fa-solid fa-triangle-exclamation" [style.color]="'red'" (click)="showReportForm=true"> </i></div>
+                                Report
+                            </div>
                         </div>
-                        <div>
-                            <div [style]="{'color': 'black !important'}">Candidates </div>
-                            <select (change)="onCandidatesSelect($event.target.value)" #candidatesOptionElement>
-                                <option *ngFor="let candidate of candidates" [value]="candidate.value" [style.color]="'black'">
-                                    {{candidate.viewValue}}
-                                </option>
-                            </select>
+                        <div class="bottom-container">
+                            <div>
+                                <div [style]="{'color': 'black !important'}">Candidates </div>
+                                <select (change)="onCandidatesSelect($event.target.value)" #candidatesOptionElement>
+                                    <option *ngFor="let candidate of candidates" [value]="candidate.value" [style.color]="'black'">
+                                        {{candidate.viewValue}}
+                                    </option>
+                                </select>
+                            </div>
+                            <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}"
+                                    (click)="submit()">{{ isGuessAssociationsTask ? 'Solve' : 'Test AI' }}</button>
+                            <!--                        <button class="btn btn-neutral btn-big" (click)="restartPractice()">-->
+                            <!--                            <li class="fas fa-redo-alt"></li>-->
+                            <!--                        </button>-->
+                            <button class="btn btn-neutral btn-big" (click)="moveRight()">
+                                <li class="fas fa-arrow-right"></li>
+                            </button>
                         </div>
-                        <button class="btn btn-neutral btn-big" [ngClass]="{'submitted': _submit}"
-                                (click)="submit()">{{ isGuessAssociationsTask ? 'Solve' : 'Test AI' }}</button>
-<!--                        <button class="btn btn-neutral btn-big" (click)="restartPractice()">-->
-<!--                            <li class="fas fa-redo-alt"></li>-->
-<!--                        </button>-->
-                        <button class="btn btn-neutral btn-big" (click)="moveRight()">
-                            <li class="fas fa-arrow-right"></li>
-                        </button>
+                        <div class="top-container">
+                        </div>
                     </div>
                     <div class="label hint" [ngClass]="{'no-clue': hint === '' || responseBackgroundColor}">
                         {{hint}}
@@ -49,6 +55,8 @@
             </div>
         </div>
     </div>
+    <app-dashboard *ngIf="providerLoggedIn && dashboard" [dashboardData]="authService.userDashboard$ | async" (backarrow$)="showDashboard(false)"></app-dashboard>
+
 
     <footer class="footer">
         <div class="container">
