@@ -10,9 +10,9 @@ import {UserDashboard} from '../../types/user-dashboard';
 export class DashboardComponent{
   data = [{category: 'Fool the AI', score: 0}, {category: 'Solvable By Humans', score: 0}, {category: 'Association Solved', score: 0}];
   basicData: any;
-  horizontalOptions: any
+  horizontalOptions: any;
   @Output() backarrow$ = new EventEmitter<void>()
-
+  // https://www.chartjs.org/docs/2.9.4/configuration/tooltip.html#external-custom-tooltips for tool tip
   constructor() {
     this.basicData = {
       labels: this.data.map((x => x.category)),
@@ -47,7 +47,7 @@ export class DashboardComponent{
 
           }
         }]
-      }
+      },
     };
   }
 

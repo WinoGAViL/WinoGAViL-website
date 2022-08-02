@@ -1,5 +1,8 @@
 .page-header .content-center {
   color: black !important;
+  width: 90%;
+  max-width: none;
+  margin: auto;
 }
 
 .content-center {
@@ -7,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 7rem;
+  padding-top: 1rem;
 }
 
 .padding-bottom {
@@ -57,12 +60,35 @@ h2 {
   }
 }
 
-.ai-leaderboard {
-  padding-top: 3rem !important;
-}
-
 .ai-leaderboard > .main-label {
   font-size: 3.5rem;
+}
+
+.stats-page-ref {
+  color: #fd969e !important;
+}
+
+.medium-note {
+  //max-width: 590px;
+}
+
+::ng-deep .nav-tabs {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+}
+
+::ng-deep .tab-content {
+  width: 100%;
+}
+
+.nav-tabs-danger {
+  padding-top: 13rem !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .col-2-AI-leaderboard {

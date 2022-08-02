@@ -27,7 +27,7 @@ h1, h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 6rem;
+  padding-top: 13rem;
 }
 
 
@@ -119,8 +119,8 @@ h1, h3 {
 
 @media (max-width: 600px) {
   .practice-box {
+    padding-bottom: 10px;
     width: 100% !important;
-    height: 400px !important;
   }
 
   .explore-nav {
@@ -129,8 +129,8 @@ h1, h3 {
 }
 
 .practice-box {
+  padding-bottom: 20px;
   width: 45%;
-  height: 300px;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
 

@@ -153,20 +153,9 @@ h1, h3 {
 }
 
 @media (max-width: 600px) {
-  .practice-box {
-    width: 100% !important;
-    height: 400px !important;
-  }
-
   .explore-nav {
     flex-direction: column;
   }
-}
-
-.practice-box {
-  width: 45%;
-  height: 300px;
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
 }
 
 .got-it-container {

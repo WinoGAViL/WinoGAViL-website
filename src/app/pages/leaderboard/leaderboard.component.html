@@ -2,59 +2,70 @@
 <div class="wrapper">
     <div class="page-header header-filter">
         <div class="container center-container">
-            <div class="content-center brand">
-                <h4 class="main-label padding-bottom">
-                    Players Leaderboard 🏆
-                </h4>
-                <div class="leaderboard-container">
-                    <div class="container">
-                        <ul class="responsive-table">
-                            <li class="table-header">
-                                <div class="col-leaderboard col-1-leaderboard">Rank</div>
-                                <div class="col-leaderboard col-2-leaderboard">User</div>
-                                <div class="col-leaderboard col-3-leaderboard" matTooltip="The player score for creating associations that solves the UI. It is calculated by
+            <tabset class="nav-tabs-danger">
+                <tab heading="Players">
+                    <div class="content-center brand">
+                        <h4 class="main-label">
+                            Players Leaderboard 🏆
+                        </h4>
+                        <div class="medium-note">Go to <a class="stats-page-ref" href="./challenge-the-ai">Challenge the AI</a> page and play the combined game to increase your scores.</div>
+                        <div class="medium-note  padding-bottom">The Best players are featured in this leaderboard.</div>
+                        <div class="leaderboard-container">
+
+
+                            <div class="container">
+                                <ul class="responsive-table">
+                                    <li class="table-header">
+                                        <div class="col-leaderboard col-1-leaderboard">Rank</div>
+                                        <div class="col-leaderboard col-2-leaderboard">User</div>
+                                        <div class="col-leaderboard col-3-leaderboard" matTooltip="The player score for creating associations that solves the UI. It is calculated by
                                  (100 - ‘model score’), where the model score is the Jaccard index of the model predictions and the labeled associations." style="cursor: help">Fool The AI</div>
-                                <div class="col-leaderboard col-4-leaderboard" matTooltip="The average score of three solvers.
+                                        <div class="col-leaderboard col-4-leaderboard" matTooltip="The average score of three solvers.
                                 Each solver score is calculated by a Jaccard index of the solver selections and the labeled associations."  style="cursor: help">Solvable by Humans</div>
-                                <div class="col-leaderboard col-5-leaderboard" matTooltip="The player score for solving existing associations created by users.
+                                        <div class="col-leaderboard col-5-leaderboard" matTooltip="The player score for solving existing associations created by users.
                                 Each player score is calculated by a Jaccard index of the player selections and the labeled associations."  style="cursor: help">Solving Associations</div>
-                            </li>
+                                    </li>
 
-                            <li class="table-row" *ngFor="let user of (leaderboard$ | async)">
-                                <div class="col-leaderboard col-1-leaderboard" data-label="Rank">{{user.rank}}</div>
-                                <div class="col-leaderboard col-2-leaderboard" data-label="User">{{user.username}}</div>
-                                <div class="col-leaderboard col-3-leaderboard" data-label="Fool the AI">{{user.foolTheAI}}</div>
-                                <div class="col-leaderboard col-4-leaderboard" data-label="Solvable by Humans">{{user.solvableByHumans}}</div>
-                                <div class="col-leaderboard col-5-leaderboard" data-label="Solving Associations">{{user.numberOfAssociationsSolved}}</div>
-                            </li>
+                                    <li class="table-row" *ngFor="let user of (leaderboard$ | async)">
+                                        <div class="col-leaderboard col-1-leaderboard" data-label="Rank">{{user.rank}}</div>
+                                        <div class="col-leaderboard col-2-leaderboard" data-label="User">{{user.username}}</div>
+                                        <div class="col-leaderboard col-3-leaderboard" data-label="Fool the AI">{{user.foolTheAI}}</div>
+                                        <div class="col-leaderboard col-4-leaderboard" data-label="Solvable by Humans">{{user.solvableByHumans}}</div>
+                                        <div class="col-leaderboard col-5-leaderboard" data-label="Solving Associations">{{user.numberOfAssociationsSolved}}</div>
+                                    </li>
 
-                        </ul>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="small-note">* Scores are Jaccard Index (%)</div>
                     </div>
-                </div>
-                <div class="small-note">* Scores are Jaccard Index (%)</div>
-            </div>
-            <div class="content-center brand ai-leaderboard">
-                <h4 class="main-label padding-bottom">
-                    AI Models Leaderboard 🏆
-                </h4>
-                <div class="leaderboard-container">
-                    <div class="container">
-                        <ul class="responsive-table">
-                            <li class="table-header">
-                                <div class="col-leaderboard col-2-AI-leaderboard">Model</div>
-                                <div class="col-leaderboard col-3-leaderboard">10 & 12</div>
-                                <div class="col-leaderboard col-4-leaderboard">5 & 6</div>
-                            </li>
+                </tab>
+                <tab heading="AI Models">
+                    <div class="content-center brand ai-leaderboard">
+                        <h4 class="main-label">
+                            AI Models Leaderboard 🏆
+                        </h4>
+                        <div class="medium-note padding-bottom">To submit your model performance to our leaderboard, send us the details to winogavil@gmail.com.</div>
+                        <div class="leaderboard-container">
+                            <div class="container">
+                                <ul class="responsive-table">
+                                    <li class="table-header">
+                                        <div class="col-leaderboard col-2-AI-leaderboard">Model</div>
+                                        <div class="col-leaderboard col-3-leaderboard">10 & 12</div>
+                                        <div class="col-leaderboard col-4-leaderboard">5 & 6</div>
+                                    </li>
 
-                            <li class="table-row" *ngFor="let model of models">
-                                <div class="col-leaderboard col-2-AI-leaderboard" data-label="Model">{{model.name}}</div>
-                                <div class="col-leaderboard col-3-leaderboard" data-label="10 & 12">{{model["10&12"]}}</div>
-                                <div class="col-leaderboard col-4-leaderboard" data-label="5 & 6">{{model['5&6']}}</div>
-                            </li>
-                        </ul>
+                                    <li class="table-row" *ngFor="let model of models">
+                                        <div class="col-leaderboard col-2-AI-leaderboard" data-label="Model">{{model.name}}</div>
+                                        <div class="col-leaderboard col-3-leaderboard" data-label="10 & 12">{{model["10&12"]}}</div>
+                                        <div class="col-leaderboard col-4-leaderboard" data-label="5 & 6">{{model['5&6']}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </tab>
+            </tabset>
         </div>
     </div>
 

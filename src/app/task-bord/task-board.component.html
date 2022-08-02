@@ -3,7 +3,7 @@
 <div class="analogy-container">
     <div class="cue-line-container">
         <div class="fas-container">
-            <img class="dashboard-icon" style="cursor: pointer" src="assets/img/dashboard.png" (click)="showDashboard()">
+            <img class="dashboard-icon" *ngIf="userDashboard" style="cursor: pointer" src="assets/img/dashboard.png" (click)="showDashboard()">
         </div>
         <div class="right-board-container">
             <div class="board top-board" [style.width]="isGuessAssociationsTask ? '600px' : 'auto'">
