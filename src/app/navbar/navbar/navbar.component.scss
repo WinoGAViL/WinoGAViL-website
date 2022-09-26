@@ -15,3 +15,12 @@
 @media (max-width: 1180px) {
 
 }
+
+@media (min-width: 990px) {
+  ::ng-deep li {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+}
+
