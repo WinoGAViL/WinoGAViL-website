@@ -13,6 +13,7 @@ export class DownloadComponent implements OnInit, OnDestroy {
   date = new Date();
   pagination = 3;
   pagination1 = 1;
+  selectedTab = '';
 
   constructor() {
     window.name = 'WinoGAViL'
@@ -25,4 +26,9 @@ export class DownloadComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('index-page');
   }
+
+  setSelectedTabName(tabName) {
+    this.selectedTab = tabName;
+  }
+
 }

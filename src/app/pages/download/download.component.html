@@ -10,29 +10,49 @@
                         <div class="card">
                             <div class="card-header">
                                 <tabset class="nav-tabs-danger">
-                                    <tab heading="Game 10-12">
+                                    <tab heading="Full Dataset" (selectTab)="setSelectedTabName('Full Dataset')">
+                                        <b>Current dataset version:</b> v1.0 (released in June 2022)<br>
+                                        This CSV contains the dataset for the entire data collected with WinoGAViLE game, 5-12 candidates. <br><br>
+                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/winogavil_dataset.csv" target="_blank">
+                                            <button class="btn btn-neutral"><i class="download-icon tim-icons icon-cloud-download-93" ></i>Download </button>
+                                        </a><br>
+                                    </tab>
+                                    <tab heading="Dataset 10-12" (selectTab)="setSelectedTabName('Dataset 10-12')">
                                         <b>Current dataset version:</b> v1.0 (released in June 2022)<br>
                                         This CSV contains the dataset for the data collected with WinoGAViLE game, 10-12 candidates. <br><br>
-                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/game_10_12.csv">
-                                            <button class="btn btn-neutral"><i class="download-icon tim-icons icon-cloud-download-93"></i>Download </button>
+                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/game_10_12.csv" target="_blank">
+                                            <button class="btn btn-neutral"><i class="download-icon tim-icons icon-cloud-download-93" ></i>Download </button>
                                         </a><br>
                                     </tab>
-                                    <tab heading="Game 5-6">
+                                    <tab heading="Dataset 5-6" (selectTab)="setSelectedTabName('Dataset 5-6')">
                                         <b>Current dataset version:</b> v1.0 (released in June 2022)<br>
                                         This CSV contains the dataset for the data collected with WinoGAViLE game, 5-6 candidates.<br><br>
-                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/game_5_6.csv">
+                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/game_5_6.csv" target="_blank">
                                             <button class="btn btn-neutral"><i class="download-icon tim-icons icon-cloud-download-93"></i>Download </button>
                                         </a><br>
                                     </tab>
-                                    <tab heading="SWOW Vision Baseline">
+                                    <tab heading="SWOW Vision Baseline" (selectTab)="setSelectedTabName('SWOW Vision Baseline')">
                                         <b>Current dataset version:</b> v1.0 (released in June 2022)<br>
                                         This CSV contains the SWOW vision baseline dataset, with 5-6 candidates.<br><br>
-                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/swow.csv">
+                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/swow.csv" target="_blank">
+                                            <button class="btn btn-neutral"><i class="download-icon tim-icons icon-cloud-download-93"> </i>Download </button>
+                                        </a><br>
+                                    </tab>
+                                    <tab heading="Model Analysis" (selectTab)="setSelectedTabName('Model Analysis')">
+                                        <b>Current dataset version:</b> v1.0 (released in June 2022)<br>
+                                        This CSV contains model analysis on different association types.<br><br>
+                                        We sampled ~1K cue-image pairs of the instances created via the game with 10-12 candidates for analysis.
+                                        Three annotators were instructed to classify the associations to six categories:
+                                        (a) visually salient; (b) visually non-salient; (c) concept-related; (d) activity; (e) counting; (f) colors.
+                                        Full description in Section 3.3 in the paper.
+                                        Annotation guidelines are available <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/association_types_annotations_guidelines.pdf" target="_blank">here</a>.
+                                        <br><br>
+                                        <a href="https://github.com/WinoGAViL/WinoGAViL-experiments/blob/main/assets/model_analysis_on_different_association_types.csv" target="_blank">
                                             <button class="btn btn-neutral"><i class="download-icon tim-icons icon-cloud-download-93"> </i>Download </button>
                                         </a><br>
                                     </tab>
                                     This file is under the CC-BY 4.0 license. The csv records are structured as follows:
-                                    <div class="highlight">
+                                    <div class="highlight" *ngIf="selectedTab != 'Model Analysis'">
                                         <code [style.color]="'black'">
                                             candidates:       ["bison", "shelter", "beard", "flea", "cattle", "shave"]  #list of image candidates<br>
                                             cue:                                                           pogonophile  #the generated cue<br>
@@ -43,6 +63,21 @@
                                             solvers_jaccard_mean:                                                  1.0  # three solvers scores average on the generated association instance<br>
                                             solvers_jaccard_std:                                                   0.0  # three solvers scores standard deviation on the generated association instance<br>
                                             ID:                                                                    367  # the ID<br>
+                                        </code>
+                                    </div>
+                                    <div class="highlight" *ngIf="selectedTab == 'Model Analysis'">
+                                        <code [style.color]="'black'">
+                                            candidates:       [“tea”, “marshmallow”, “pile”, “splinter”, “relic”, “rose”, “product”, “heater”, “hanger”, “children”, “furniture”, “heroin”]  #list of image candidates<br>
+                                            cue:                                                           thorn  #the generated cue<br>
+                                            associations:                                    [“splinter”, “rose”]  #the images associated with the cue selected by the user<br>
+                                            score_fool_the_ai:                                                      67  # the spymaster score (100 - model score) for fooling the AI, with CLIP RN50 model<br>
+                                            num_associations:                                                        2  # the number of images selected as associative with the cue<br>
+                                            num_candidates:                                                          12  # the number of candidates<br>
+                                            solvers_jaccard_mean:                                                  1.0  # three solvers scores average on the generated association instance<br>
+                                            solvers_jaccard_std:                                                   0.0  # three solvers scores standard deviation on the generated association instance<br>
+                                            ID:                                                                    0  # the ID<br>
+                                            clip_vit32_predictions                                   [“rose”, “hanger”]<br>
+                                            annotations_label       {{'{'}}“rose”: “Non Visual, Concept Related”, “splinter”: “Visually Non-Salient”{{'}'}}<br>
                                         </code>
                                     </div>
                                     <br>
